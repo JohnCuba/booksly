@@ -1,0 +1,18 @@
+{
+  "common": {
+    "refresh": "Обновить",
+    "unwrited": "Не найдено",
+    "cancel": "Отмена",
+    "save": "Сохранить"
+  },
+  "pages": {
+    "local_library": "Моя библиотека",
+    "settings": "Настройки"
+  },
+  "settings": {
+    "local_library_path": "Путь к вашей библиотеке",
+    "online_libraries": "Онлайн библиотеки",
+    "add_library": "Добавить библиотеку",
+    "uri_placeholder": "Введите адрес библиотеки"
+  }
+}
