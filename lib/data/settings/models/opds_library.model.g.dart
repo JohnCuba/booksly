@@ -19,17 +19,20 @@ class OpdsLibraryAdapter extends TypeAdapter<OpdsLibrary> {
     return OpdsLibrary(
       uri: fields[0] == null ? '' : fields[0] as String,
       title: fields[1] == null ? '' : fields[1] as String,
+      slug: fields[3] == null ? '' : fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, OpdsLibrary obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.uri)
       ..writeByte(1)
-      ..write(obj.title);
+      ..write(obj.title)
+      ..writeByte(3)
+      ..write(obj.slug);
   }
 
   @override
