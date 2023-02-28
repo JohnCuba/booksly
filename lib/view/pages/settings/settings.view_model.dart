@@ -24,10 +24,10 @@ class SettingsViewModel extends Cubit<SettingsState> {
   final SettingsRepository _settingsRepository;
 
   SettingsViewModel(this._settingsRepository) : super(const SettingsState()) {
-    _initLoad();
+    _init();
   }
 
-  _initLoad() async {
+  _init() async {
     await _settingsRepository.init();
 
     emit(SettingsState(
