@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:booksly/config/consts.config.dart';
+import 'package:booksly/config/consts.dart';
 import 'package:booksly/data/local_library/local_library_api.dart';
 import 'package:booksly/data/local_library/models/local_book.model.dart';
 import 'package:injectable/injectable.dart';

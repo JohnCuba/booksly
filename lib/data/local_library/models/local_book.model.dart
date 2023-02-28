@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:booksly/config/consts.config.dart';
+import 'package:booksly/config/consts.dart';
 import 'package:booksly/data/lib/utils/get_root_xml_doc_from_epub.utils.dart';
 import 'package:booksly/data/lib/utils/get_value_from_xml.util.dart';
 
