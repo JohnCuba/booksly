@@ -1,6 +1,7 @@
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/config/localization.config.dart';
 import 'package:booksly/view/app/navigation.cubit.dart';
+import 'package:booksly/view/pages/local_library/local_library.page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -51,7 +52,7 @@ class AppView extends StatelessWidget {
               return SidebarItems(
                   items: pages
                       .map((e) =>
-                          SidebarItem(label: Text(tr('pages.${e.name}'))))
+                          SidebarItem(label: Text(e.name)))
                       .toList(),
                   currentIndex: pageIndex,
                   onChanged: (value) {
