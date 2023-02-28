@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:booksly/data/local_library/models/local_book.model.dart';
 import 'package:booksly/domain/local_library/local_library.repository.dart';
+import 'package:booksly/domain/settings/settings.event.dart';
 import 'package:injectable/injectable.dart';
 import 'package:equatable/equatable.dart';
 import 'package:booksly/domain/settings/settings.repository.dart';
@@ -24,10 +27,38 @@ class LocalLibraryState extends Equatable {
 class LocalLibraryViewModel extends Cubit<LocalLibraryState> {
   final SettingsRepository _settingsRepository;
   final LocalLibraryRepository _localLibraryRepository;
+  final List<StreamSubscription> _listeners = [];
 
   LocalLibraryViewModel(this._settingsRepository, this._localLibraryRepository)
       : super(const LocalLibraryState()) {
-    _settingsRepository.init().then((value) => update());
+    _init();
+  }
+
+  @override
+  close() async {
+    _cancelListeners();
+    super.close();
+  }
+
+  _init() async {
+    await _settingsRepository.init();
+    _registerListeners();
+    update();
+  }
+
+  _registerListeners() {
+    _listeners.add(
+      _settingsRepository.eventBus.on<SettingsUpdate>()
+        .listen((event) {
+          update();
+        })
+    );
+  }
+
+  _cancelListeners() {
+    for (var listener in _listeners) { 
+      listener.cancel(); 
+    }
   }
 
   update() async {

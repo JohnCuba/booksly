@@ -28,6 +28,7 @@ class SettingsRepository {
     );
 
     await _settingsApi.saveSettings(settings);
+    eventBus.fire(SettingsUpdate());
     return _settingsApi.getSettings();
   }
 
