@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:xml/xml.dart';
 
-String getValueFromXml(XmlDocument doc, List<String> keys) {
+String getValueFromXml(XmlNode doc, List<String> keys) {
   final fallback = tr('common.unwrited');
   String value = fallback;
 
