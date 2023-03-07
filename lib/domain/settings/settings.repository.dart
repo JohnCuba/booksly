@@ -36,6 +36,10 @@ class SettingsRepository {
     return _settingsApi.getOpdsLibraries();
   }
 
+  Future<OpdsLibrary> getOpdsLibrary(String slug) async {
+    return getOpdsLibraries().then((libList) => libList.firstWhere((lib) => lib.slug == slug));
+  }
+
   Future<void> addOpdsLibrary(String uri) async {
     final opdLibrary = await OpdsLibrary.parseUri(uri);
     await _settingsApi.addOpdsLibrary(opdLibrary);

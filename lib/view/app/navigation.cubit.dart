@@ -67,7 +67,7 @@ class NavigationCubit extends Cubit<NavigationState> {
   _updateAppPages() async {
     final libraryPages = await _settingsRepository.getOpdsLibraries()
           .then((pages) => pages
-          .map((page) => AppPage(name: page.title, path: 'opds/${page.slug}')));
+          .map((page) => AppPage(name: page.title, path: '/opds/${page.slug}')));
 
     emit(NavigationState(
       pageIndex: state.pageIndex, 
@@ -80,7 +80,7 @@ class NavigationCubit extends Cubit<NavigationState> {
   }
 
   _routeChangeListener() {
-    final pageIndex = state.pages.indexWhere((element) => element.path == router.current.path);
+    final pageIndex = state.pages.indexWhere((element) => element.path == router.current.match);
     emit(
       NavigationState(
         pageIndex: max(pageIndex, 0),

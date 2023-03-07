@@ -41,7 +41,7 @@ class AppView extends StatelessWidget {
       locale: context.locale,
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
-      theme: MacosThemeData.dark(),
+      theme: MacosThemeData.light(),
       builder: (context, child) {
         return MacosWindow(
           sidebar: Sidebar(
@@ -50,8 +50,7 @@ class AppView extends StatelessWidget {
             builder: (context, scrollController) {
               return SidebarItems(
                   items: pages
-                      .map((e) =>
-                          SidebarItem(label: Text(e.name)))
+                      .map((e) => SidebarItem(label: Text(e.name)))
                       .toList(),
                   currentIndex: pageIndex,
                   onChanged: (value) {

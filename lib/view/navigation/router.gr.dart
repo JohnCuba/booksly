@@ -29,6 +29,19 @@ class _$AppRouter extends RootStackRouter {
         child: const SettingsPage(),
       );
     },
+    Opds_library.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<Opds_libraryArgs>(
+          orElse: () =>
+              Opds_libraryArgs(librarySlug: pathParams.getString('slug')));
+      return MaterialPageX<Widget>(
+        routeData: routeData,
+        child: OpdsLibraryPage(
+          key: args.key,
+          librarySlug: args.librarySlug,
+        ),
+      );
+    },
   };
 
   @override
@@ -46,6 +59,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           Settings.name,
           path: '/settings',
+        ),
+        RouteConfig(
+          Opds_library.name,
+          path: '/opds/:slug',
         ),
       ];
 }
@@ -72,4 +89,39 @@ class Settings extends PageRouteInfo<void> {
         );
 
   static const String name = 'Settings';
+}
+
+/// generated route for
+/// [OpdsLibraryPage]
+class Opds_library extends PageRouteInfo<Opds_libraryArgs> {
+  Opds_library({
+    Key? key,
+    required String librarySlug,
+  }) : super(
+          Opds_library.name,
+          path: '/opds/:slug',
+          args: Opds_libraryArgs(
+            key: key,
+            librarySlug: librarySlug,
+          ),
+          rawPathParams: {'slug': librarySlug},
+        );
+
+  static const String name = 'Opds_library';
+}
+
+class Opds_libraryArgs {
+  const Opds_libraryArgs({
+    this.key,
+    required this.librarySlug,
+  });
+
+  final Key? key;
+
+  final String librarySlug;
+
+  @override
+  String toString() {
+    return 'Opds_libraryArgs{key: $key, librarySlug: $librarySlug}';
+  }
 }

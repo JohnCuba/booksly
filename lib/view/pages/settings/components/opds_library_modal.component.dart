@@ -1,5 +1,5 @@
-import 'package:booksly/view/lib/utils/check_link.util.dart';
 import 'package:booksly/view/pages/settings/settings.view_model.dart';
+import 'package:booksly/lib/utils/check_link.util.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,7 @@ class _OpdsLibraryModalState extends State<OpdsLibraryModal> {
   bool isLinkValid = false;
 
   void handleLinkEditing(String link) {
-    final isCurrentlyValid = checkLink(link);
+    final isCurrentlyValid = Uri.tryParse(link) != null;
 
     if (isLinkValid != isCurrentlyValid) {
       setState(() {
