@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
+import 'package:translit/translit.dart';
 import 'package:xml/xml.dart';
 
 part 'opds_library.model.g.dart';
@@ -21,11 +22,12 @@ class OpdsLibrary extends HiveObject {
     final response = await Dio().get(uri);
     final rootXml = XmlDocument.parse(response.data.toString());
     final title = rootXml.findAllElements('title').first.text;
+    final slug = Translit().toTranslit(source: title.toLowerCase().replaceAll(' ', '_'));
 
     return OpdsLibrary(
       uri: uri,
       title: title,
-      slug: title.toLowerCase().replaceAll(' ', '_')
+      slug: slug,
     );
   }
 }

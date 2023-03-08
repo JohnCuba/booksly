@@ -25,6 +25,7 @@ dependencies:
   injectable: ^2.1.0
   intl: ^0.17.0
   macos_ui: ^1.10.0
+  translit: ^2.0.1
   xml: ^6.2.2
 
 dev_dependencies:
