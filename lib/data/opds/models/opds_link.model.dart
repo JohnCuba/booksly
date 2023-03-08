@@ -52,6 +52,7 @@ class OpdsLinkCatalog extends OpdsLink {
 
 class OpdsLinkDownload extends OpdsLink {
   late final SupportedExtensions extension;
+  late final String? unSupportedExtension;
   OpdsLinkDownload(XmlElement link) {
     _resolvePath(link);
     _resolveExtension(link);
@@ -60,9 +61,13 @@ class OpdsLinkDownload extends OpdsLink {
   _resolveExtension(XmlElement link) {
     final type = link.getAttribute('type');
     if (type == null) throw Error();
-    extension = SupportedExtensions.values.firstWhere(
-      (supportedExtension) => type.contains('application/$supportedExtension')
-    );
+    try {
+      extension = SupportedExtensions.values.firstWhere(
+        (supportedExtension) => type.contains('application/${supportedExtension.name}')
+      );
+    } catch (_) {
+      unSupportedExtension = type.replaceFirst('application/', '');
+    }
   }
 }
 
