@@ -3,7 +3,6 @@ import 'package:booksly/config/localization.dart';
 import 'package:booksly/view/app/navigation.cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:macos_ui/macos_ui.dart';
 
@@ -30,10 +29,8 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = context.select((NavigationCubit cubit) => cubit.router);
-    final pages = context.select((NavigationCubit cubit) => cubit.state.pages);
-    final pageIndex =
-        context.select((NavigationCubit cubit) => cubit.state.pageIndex);
+    final appRouter = context.read<NavigationCubit>().router;
+    final navigationState = context.watch<NavigationCubit>().state;
 
     return MacosApp.router(
       localizationsDelegates: context.localizationDelegates,
@@ -41,7 +38,7 @@ class AppView extends StatelessWidget {
       locale: context.locale,
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
-      theme: MacosThemeData.light(),
+      themeMode: ThemeMode.light,
       builder: (context, child) {
         return MacosWindow(
           sidebar: Sidebar(
@@ -49,12 +46,12 @@ class AppView extends StatelessWidget {
             minWidth: 200,
             builder: (context, scrollController) {
               return SidebarItems(
-                  items: pages
+                  items: navigationState.pages
                       .map((e) => SidebarItem(label: Text(e.name)))
                       .toList(),
-                  currentIndex: pageIndex,
+                  currentIndex: navigationState.pageIndex,
                   onChanged: (value) {
-                    appRouter.navigateNamed(pages[value].path);
+                    appRouter.navigateNamed(navigationState.pages[value].path);
                   });
             },
           ),
