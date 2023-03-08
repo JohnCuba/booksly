@@ -22,6 +22,7 @@ class OpdsLink {
           }
           return OpdsLinkDownload(link);
         }
+        case 'text': return OpdsLinkExternal(link);
         default: throw Error();
       }
     } catch (_) {
@@ -72,5 +73,13 @@ class OpdsLinkDownload extends OpdsLink {
 }
 
 class OpdsLinkImage extends OpdsLink {
-  OpdsLinkImage(XmlElement link);
+  OpdsLinkImage(XmlElement link) {
+    _resolvePath(link);
+  }
+}
+
+class OpdsLinkExternal extends OpdsLink {
+  OpdsLinkExternal(XmlElement link) {
+    _resolvePath(link);
+  }
 }
