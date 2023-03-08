@@ -7,10 +7,12 @@ import 'package:injectable/injectable.dart';
 class OpdsLibraryRepository {
   final OpdsApi _opdsApi;
   late final OpdsLibrary _library;
+  String get libraryTitle  => _library.title;
+  String get libraryBasePath => _opdsApi.basePath;
 
   OpdsLibraryRepository(this._opdsApi);
 
-  init(OpdsLibrary library) {
+  void init(OpdsLibrary library) {
     _library = library;
     _opdsApi.init(_library);
   }

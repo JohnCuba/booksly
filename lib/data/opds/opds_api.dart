@@ -4,6 +4,7 @@ import 'models/opds_page.model.dart';
 
 abstract class OpdsApi {
   const OpdsApi(OpdsLibrary library);
+  String get basePath;
 
   void init(OpdsLibrary library);
   Future<OpdsPage> readPage([String? path]);

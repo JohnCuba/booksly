@@ -8,7 +8,17 @@ part 'opds_library.state.freezed.dart';
 class OpdsLibraryState with _$OpdsLibraryState {
   const factory OpdsLibraryState({
     required bool isLoading,
+    required List<HistoryRecord> history,
     OpdsLibrary? library,
     OpdsPage? page,
   }) = _OpdsLibraryState;
+}
+
+class HistoryRecord {
+  String title;
+  String slug;
+  HistoryRecord({
+    required this.slug,
+    required this.title,
+  });
 }

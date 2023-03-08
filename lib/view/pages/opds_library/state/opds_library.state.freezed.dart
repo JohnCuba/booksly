@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OpdsLibraryState {
   bool get isLoading => throw _privateConstructorUsedError;
+  List<HistoryRecord> get history => throw _privateConstructorUsedError;
   OpdsLibrary? get library => throw _privateConstructorUsedError;
   OpdsPage? get page => throw _privateConstructorUsedError;
 
@@ -31,7 +32,11 @@ abstract class $OpdsLibraryStateCopyWith<$Res> {
           OpdsLibraryState value, $Res Function(OpdsLibraryState) then) =
       _$OpdsLibraryStateCopyWithImpl<$Res, OpdsLibraryState>;
   @useResult
-  $Res call({bool isLoading, OpdsLibrary? library, OpdsPage? page});
+  $Res call(
+      {bool isLoading,
+      List<HistoryRecord> history,
+      OpdsLibrary? library,
+      OpdsPage? page});
 }
 
 /// @nodoc
@@ -48,6 +53,7 @@ class _$OpdsLibraryStateCopyWithImpl<$Res, $Val extends OpdsLibraryState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? history = null,
     Object? library = freezed,
     Object? page = freezed,
   }) {
@@ -56,6 +62,10 @@ class _$OpdsLibraryStateCopyWithImpl<$Res, $Val extends OpdsLibraryState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<HistoryRecord>,
       library: freezed == library
           ? _value.library
           : library // ignore: cast_nullable_to_non_nullable
@@ -76,7 +86,11 @@ abstract class _$$_OpdsLibraryStateCopyWith<$Res>
       __$$_OpdsLibraryStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, OpdsLibrary? library, OpdsPage? page});
+  $Res call(
+      {bool isLoading,
+      List<HistoryRecord> history,
+      OpdsLibrary? library,
+      OpdsPage? page});
 }
 
 /// @nodoc
@@ -91,6 +105,7 @@ class __$$_OpdsLibraryStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? history = null,
     Object? library = freezed,
     Object? page = freezed,
   }) {
@@ -99,6 +114,10 @@ class __$$_OpdsLibraryStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      history: null == history
+          ? _value._history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<HistoryRecord>,
       library: freezed == library
           ? _value.library
           : library // ignore: cast_nullable_to_non_nullable
@@ -114,10 +133,23 @@ class __$$_OpdsLibraryStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_OpdsLibraryState implements _OpdsLibraryState {
-  const _$_OpdsLibraryState({required this.isLoading, this.library, this.page});
+  const _$_OpdsLibraryState(
+      {required this.isLoading,
+      required final List<HistoryRecord> history,
+      this.library,
+      this.page})
+      : _history = history;
 
   @override
   final bool isLoading;
+  final List<HistoryRecord> _history;
+  @override
+  List<HistoryRecord> get history {
+    if (_history is EqualUnmodifiableListView) return _history;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_history);
+  }
+
   @override
   final OpdsLibrary? library;
   @override
@@ -125,7 +157,7 @@ class _$_OpdsLibraryState implements _OpdsLibraryState {
 
   @override
   String toString() {
-    return 'OpdsLibraryState(isLoading: $isLoading, library: $library, page: $page)';
+    return 'OpdsLibraryState(isLoading: $isLoading, history: $history, library: $library, page: $page)';
   }
 
   @override
@@ -135,12 +167,14 @@ class _$_OpdsLibraryState implements _OpdsLibraryState {
             other is _$_OpdsLibraryState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            const DeepCollectionEquality().equals(other._history, _history) &&
             (identical(other.library, library) || other.library == library) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, library, page);
+  int get hashCode => Object.hash(runtimeType, isLoading,
+      const DeepCollectionEquality().hash(_history), library, page);
 
   @JsonKey(ignore: true)
   @override
@@ -152,11 +186,14 @@ class _$_OpdsLibraryState implements _OpdsLibraryState {
 abstract class _OpdsLibraryState implements OpdsLibraryState {
   const factory _OpdsLibraryState(
       {required final bool isLoading,
+      required final List<HistoryRecord> history,
       final OpdsLibrary? library,
       final OpdsPage? page}) = _$_OpdsLibraryState;
 
   @override
   bool get isLoading;
+  @override
+  List<HistoryRecord> get history;
   @override
   OpdsLibrary? get library;
   @override

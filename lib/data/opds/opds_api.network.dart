@@ -9,6 +9,8 @@ import 'opds_api.dart';
 class OpdsApiNetwork implements OpdsApi {
   late Dio _dio;
   late String _basePath;
+  @override
+  String get basePath => _basePath;
 
   @override
   init(OpdsLibrary library) {
