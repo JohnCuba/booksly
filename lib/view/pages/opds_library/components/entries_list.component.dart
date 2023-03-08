@@ -23,10 +23,10 @@ class EntriesList extends StatelessWidget {
     final goTo = context.read<OpdsLibraryCubit>().goTo;
     final page = context.watch<OpdsLibraryCubit>().state.page;
     final entry = page!.entries[index];
-    final catalogLink = entry.links.firstWhere((element) => element is OpdsLinkCatalog);
 
     handleClick() {
-      goTo(catalogLink.path, entry.title);
+      final catalogLink = entry.links.firstWhere((link) => link is OpdsLinkCatalog) as OpdsLinkCatalog;
+      goTo(catalogLink.uri, entry.title);
     }
   
     return ListTile(

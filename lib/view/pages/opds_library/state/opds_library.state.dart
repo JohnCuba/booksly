@@ -16,9 +16,9 @@ class OpdsLibraryState with _$OpdsLibraryState {
 
 class HistoryRecord {
   String title;
-  String slug;
+  Uri uri;
   HistoryRecord({
-    required this.slug,
+    required this.uri,
     required this.title,
   });
 }

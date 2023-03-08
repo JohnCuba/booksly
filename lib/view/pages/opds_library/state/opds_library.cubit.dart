@@ -22,7 +22,7 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
     final page = await _opdsLibraryRepository.loadPage();
     final history = [...state.history];
     history.add(HistoryRecord(
-      slug: _opdsLibraryRepository.libraryBasePath,
+      uri: Uri.parse(_opdsLibraryRepository.libraryBasePath),
       title: 'Home',
     ));
 
@@ -41,7 +41,7 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
   _loadPage(List<HistoryRecord> history) async {
     emit(state.copyWith(isLoading: true));
 
-    final page = await _opdsLibraryRepository.loadPage(history.last.slug);
+    final page = await _opdsLibraryRepository.loadPage(history.last.uri);
 
     emit(state.copyWith(
       isLoading: false,
@@ -57,8 +57,8 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
     _loadPage(history);
   }
 
-  goTo(String path, String title) {
-    final newHistoryRecord = HistoryRecord(slug: path, title: title);
+  goTo(Uri uri, String title) {
+    final newHistoryRecord = HistoryRecord(uri: uri, title: title);
     final history = [...state.history];
 
     history.add(newHistoryRecord);
