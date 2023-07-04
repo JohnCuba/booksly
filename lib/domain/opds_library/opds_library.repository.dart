@@ -20,8 +20,7 @@ class OpdsLibraryRepository {
   Future<OpdsPage> loadPage([Uri? uri]) {
     String? path;
     if (uri != null) {
-      path = uri.path;
-      path = uri.query.isNotEmpty ? '$path?${uri.query}' : path;
+      path = uri.query.isNotEmpty ? '$path?${uri.query}' : uri.path;
     }
     return _opdsApi.readPage(path);
   }

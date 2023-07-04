@@ -34,18 +34,22 @@ class EntriesList extends StatelessWidget {
       title: Text(entry.title),
       subtitle: Text(entry.content),
       onTap: handleClick,
-      trailing: _buildDownloadButton(context, downloadLinks),
+      trailing: _buildDownloadButton(context, downloadLinks, entry.title),
     );
   }
 
-  Widget? _buildDownloadButton(BuildContext context, Iterable<OpdsLinkDownload> links) {
+  Widget? _buildDownloadButton(
+      BuildContext context,
+      Iterable<OpdsLinkDownload> links,
+      String title,
+  ) {
     if (links.isEmpty) {
       return null;
     }
 
     handleClick() {
       final downloadBook = context.read<OpdsLibraryCubit>().downloadBook;
-      downloadBook(links.first.uri);
+      downloadBook(links.first, title);
     }
 
     return IconButton(

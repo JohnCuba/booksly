@@ -1,7 +1,5 @@
-import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-
 import 'models/opds_page.model.dart';
 import 'opds_api.dart';
 
@@ -13,7 +11,7 @@ class OpdsApiNetwork implements OpdsApi {
   String get basePath => _basePath;
 
   @override
-  init(OpdsLibrary library) {
+  init(library) {
     final Uri uri = Uri.parse(library.uri);
     _basePath = uri.path;
     _dio = Dio(BaseOptions(
@@ -22,7 +20,7 @@ class OpdsApiNetwork implements OpdsApi {
   }
 
   @override
-  Future<OpdsPage> readPage([String? path]) async {
+  readPage([path]) async {
     final response = await _dio.get<String>(path ?? _basePath);
     return OpdsPage(response.data!);
   }

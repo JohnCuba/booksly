@@ -32,6 +32,11 @@ class SettingsRepository {
     return _settingsApi.getSettings();
   }
 
+  getLocalLibPath() async {
+    final settings = await _settingsApi.getSettings();
+    return settings.localLibPath;
+  }
+
   Future<List<OpdsLibrary>> getOpdsLibraries() {
     return _settingsApi.getOpdsLibraries();
   }
