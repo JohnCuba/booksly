@@ -6,24 +6,21 @@ import 'package:booksly/view/pages/settings/settings.page.dart';
 
 part 'router.gr.dart';
 
-@MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route',
-  routes: <AutoRoute<Widget>>[
+@AutoRouterConfig(replaceInRouteName: 'Page,Route')
+class AppRouter extends _$AppRouter {
+  @override
+  List<AutoRoute> get routes => [
     AutoRoute(
-      name: LocalLibraryPage.name,
-      path: LocalLibraryPage.path,
-      page: LocalLibraryPage,
-      initial: LocalLibraryPage.initial),
+        path: LocalLibraryPage.path,
+        page: Local_library.page,
+        initial: LocalLibraryPage.initial),
     AutoRoute(
-      name: SettingsPage.name,
-      path: SettingsPage.path,
-      page: SettingsPage,
-      initial: SettingsPage.initial),
+        path: SettingsPage.path,
+        page: Settings.page,
+        initial: SettingsPage.initial),
     AutoRoute(
-      name: OpdsLibraryPage.name,
-      path: OpdsLibraryPage.path,
-      page: OpdsLibraryPage,
-      initial: OpdsLibraryPage.initial),
-  ],
-)
-class AppRouter extends _$AppRouter {}
+        path: OpdsLibraryPage.path,
+        page: Opds_library.page,
+        initial: OpdsLibraryPage.initial),
+  ];
+}

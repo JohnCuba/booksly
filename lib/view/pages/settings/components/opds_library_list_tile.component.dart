@@ -1,7 +1,6 @@
 import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:macos_ui/macos_ui.dart';
 
 class OpdsLibraryListTile extends StatefulWidget {
   final OpdsLibrary libraryData;
@@ -21,10 +20,9 @@ class _OpdsLibraryListTileState extends State<OpdsLibraryListTile> {
     return Card(
       child: ListTile(
         title: Text(widget.libraryData.title),
-        trailing: PushButton(
+        trailing: ElevatedButton(
           onPressed: handleClickRemove,
-          buttonSize: ButtonSize.large,
-          child: const MacosIcon(CupertinoIcons.delete, color: Colors.white,),
+          child: const Icon(CupertinoIcons.delete, color: Colors.white,),
         ),
       )
     );

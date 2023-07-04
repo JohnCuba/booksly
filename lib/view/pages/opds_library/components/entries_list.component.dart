@@ -23,9 +23,10 @@ class EntriesList extends StatelessWidget {
     final goTo = context.read<OpdsLibraryCubit>().goTo;
     final page = context.watch<OpdsLibraryCubit>().state.page;
     final entry = page!.entries[index];
+    final downloadLinks = entry.links.whereType<OpdsLinkDownload>();
 
     handleClick() {
-      final catalogLink = entry.links.firstWhere((link) => link is OpdsLinkCatalog) as OpdsLinkCatalog;
+      final catalogLink = entry.links.whereType<OpdsLinkCatalog>().first;
       goTo(catalogLink.uri, entry.title);
     }
   
@@ -33,6 +34,23 @@ class EntriesList extends StatelessWidget {
       title: Text(entry.title),
       subtitle: Text(entry.content),
       onTap: handleClick,
+      trailing: _buildDownloadButton(context, downloadLinks),
+    );
+  }
+
+  Widget? _buildDownloadButton(BuildContext context, Iterable<OpdsLinkDownload> links) {
+    if (links.isEmpty) {
+      return null;
+    }
+
+    handleClick() {
+      final downloadBook = context.read<OpdsLibraryCubit>().downloadBook;
+      downloadBook(links.first.uri);
+    }
+
+    return IconButton(
+      icon: const Icon(Icons.download),
+      onPressed: handleClick,
     );
   }
 }

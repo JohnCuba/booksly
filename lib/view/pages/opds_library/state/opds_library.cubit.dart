@@ -65,4 +65,8 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
 
     _loadPage(history);
   }
+
+  downloadBook(Uri uri) {
+
+  }
 }

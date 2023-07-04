@@ -4,7 +4,6 @@ import 'package:booksly/view/app/navigation.cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:macos_ui/macos_ui.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -32,7 +31,7 @@ class AppView extends StatelessWidget {
     final appRouter = context.read<NavigationCubit>().router;
     final navigationState = context.watch<NavigationCubit>().state;
 
-    return MacosApp.router(
+    return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -40,22 +39,44 @@ class AppView extends StatelessWidget {
       routerDelegate: appRouter.delegate(),
       themeMode: ThemeMode.light,
       builder: (context, child) {
-        return MacosWindow(
-          sidebar: Sidebar(
-            isResizable: false,
-            minWidth: 200,
-            builder: (context, scrollController) {
-              return SidebarItems(
-                  items: navigationState.pages
-                      .map((e) => SidebarItem(label: Text(e.name)))
-                      .toList(),
-                  currentIndex: navigationState.pageIndex,
-                  onChanged: (value) {
-                    appRouter.navigateNamed(navigationState.pages[value].path);
-                  });
-            },
+        return Scaffold(
+          body: Row(
+            children: [
+              Flexible(
+                  flex: 2,
+                  child:
+                      Container(
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            right: BorderSide(color: Colors.black26)
+                          )
+                        ),
+                        child: Column(
+                          children: [
+                            AppBar(
+                              elevation: 0,
+                              toolbarHeight: 40,
+                              backgroundColor: Colors.transparent,
+                            ),
+                            ...navigationState.pages.map(
+                                    (e) => ListTile(
+                                  title: Text(e.name),
+                                  dense: navigationState.pages[navigationState.pageIndex].path != e.path,
+                                  onTap: () {
+                                    appRouter.navigateNamed(e.path);
+                                  },
+                                )
+                            ).toList()
+                          ],
+                        ),
+                      )
+              ),
+              Flexible(
+                  flex: 6,
+                  child: child ?? const SizedBox(),
+              ),
+            ],
           ),
-          child: child,
         );
       },
     );

@@ -3,11 +3,11 @@ import 'package:booksly/view/pages/opds_library/components/entries_list.componen
 import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:macos_ui/macos_ui.dart';
 
 import 'components/breadcrumb.component.dart';
 import 'state/opds_library.cubit.dart';
 
+@RoutePage(name: OpdsLibraryPage.name)
 class OpdsLibraryPage extends StatelessWidget {
   const OpdsLibraryPage({
     super.key,
@@ -35,15 +35,18 @@ class OpdsLibraryView extends StatelessWidget {
   Widget build(BuildContext context) {
     final libraryTitle = context.watch<OpdsLibraryCubit>().state.library?.title ?? '';
 
-    return MacosScaffold(
-      toolBar: ToolBar(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 2,
+        toolbarHeight: 40,
         title: Text(libraryTitle),
+        automaticallyImplyLeading: false,
       ),
-      children: [ContentArea(builder: _buildPage)],
+      body: _buildPage(context),
     );
   }
   
-  Widget _buildPage(BuildContext context, ScrollController scrollController) {
+  Widget _buildPage(BuildContext context) {
     final isLoading = context.watch<OpdsLibraryCubit>().state.isLoading;
     
     switch (isLoading) {

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/view/pages/settings/components/opds_library_list_tile.component.dart';
 import 'package:booksly/view/pages/settings/components/opds_library_modal.component.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booksly/view/pages/settings/settings.view_model.dart';
-import 'package:macos_ui/macos_ui.dart';
 
+@RoutePage(name: SettingsPage.name)
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
   static const name = 'settings';
@@ -29,18 +30,18 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MacosScaffold(
-        toolBar: ToolBar(
-          title: Text(tr('pages.${SettingsPage.name}')),
-        ),
-        children: [
-          ContentArea(
-            builder: _buildPage,
-          )
-        ]);
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 2,
+        toolbarHeight: 40,
+        title: Text(tr('pages.${SettingsPage.name}')),
+        automaticallyImplyLeading: false,
+      ),
+      body: _buildPage(context),
+    );
   }
 
-  Widget _buildPage(BuildContext context, ScrollController scrollController) {
+  Widget _buildPage(BuildContext context) {
     final isLoading = context
         .select((SettingsViewModel cubit) => cubit.state.settings == null);
 
@@ -61,18 +62,12 @@ class SettingsView extends StatelessWidget {
     final onRemoveLibrary = context.read<SettingsViewModel>().removeOpdsLibrary;
     
     handleClickAddOnlineLibrary() {
-      showMacosSheet(
-        context: context, 
-        // TODO: Bug in macos ui
-        builder: (BuildContext ctx) {
-          return MacosSheet(
-            insetPadding: const EdgeInsets.symmetric(vertical: 200, horizontal: 140),
-            child: BlocProvider.value(
-              value: BlocProvider.of<SettingsViewModel>(context),
-              child: const OpdsLibraryModal()
-            ),
-          );
-        }
+      showDialog(
+          context: context,
+          builder: (BuildContext ctx) => BlocProvider.value(
+            value: BlocProvider.of<SettingsViewModel>(context),
+            child: const OpdsLibraryModal()
+          )
       );
     }
 
@@ -86,18 +81,16 @@ class SettingsView extends StatelessWidget {
               tr('settings.local_library_path')
             ),
             subtitle: Text(localLibraryPath),
-            trailing: PushButton(
-              buttonSize: ButtonSize.large,
+            trailing: ElevatedButton(
               onPressed: handleClickSelectDirectory,
-              child: const MacosIcon(CupertinoIcons.folder, color: Colors.white),
+              child: const Icon(CupertinoIcons.folder, color: Colors.white),
             ),
           ),
           ListTile(
             title: Text(tr('settings.online_libraries')),
-            trailing: PushButton(
-              buttonSize: ButtonSize.large,
+            trailing: ElevatedButton(
               onPressed: handleClickAddOnlineLibrary,
-              child: const MacosIcon(CupertinoIcons.add, color: Colors.white),
+              child: const Icon(CupertinoIcons.add, color: Colors.white),
             ),
           ),
           ListView.builder(

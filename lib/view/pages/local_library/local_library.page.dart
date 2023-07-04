@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/view/pages/local_library/local_library.view_model.dart';
 import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:macos_ui/macos_ui.dart';
 
+@RoutePage(name: LocalLibraryPage.name)
 class LocalLibraryPage extends StatelessWidget {
   const LocalLibraryPage({super.key});
   static const name = 'local_library';
@@ -28,21 +29,25 @@ class LocalLibraryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final handleClickRefresh = context.read<LocalLibraryViewModel>().update;
-    return MacosScaffold(
-        toolBar: ToolBar(
-          title: Text(tr('pages.${LocalLibraryPage.name}')),
-          actions: [
-            ToolBarIconButton(
-                label: tr('common.refresh'),
-                icon: const MacosIcon(CupertinoIcons.refresh),
-                onPressed: handleClickRefresh,
-                showLabel: false),
-          ],
-        ),
-        children: [ContentArea(builder: _buildPage)]);
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 2,
+        toolbarHeight: 40,
+        title: Text(tr('pages.${LocalLibraryPage.name}')),
+        actions: [
+          IconButton(
+            onPressed: handleClickRefresh,
+            icon: const Icon(CupertinoIcons.refresh),
+            tooltip: tr('common.refresh'),
+            splashRadius: 14,
+          )
+        ],
+      ),
+      body: _buildPage(context),
+    );
   }
 
-  Widget _buildPage(BuildContext context, ScrollController scrollController) {
+  Widget _buildPage(BuildContext context) {
     final isLoading = context.watch<LocalLibraryViewModel>().state.isLoading;
 
     switch (isLoading) {
@@ -73,10 +78,9 @@ class LocalLibraryView extends StatelessWidget {
             child: ListTile(
               title: Text(files[index].title),
               subtitle: Text(files[index].author),
-              trailing: PushButton(
-                buttonSize: ButtonSize.large,
+              trailing: ElevatedButton(
                 onPressed: handleDelete,
-                child: const MacosIcon(
+                child: const Icon(
                   CupertinoIcons.delete,
                   color: Colors.white,
                 ),

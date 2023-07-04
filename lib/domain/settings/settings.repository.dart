@@ -1,8 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:booksly/data/settings/models/settings.model.dart';
 import 'package:booksly/data/settings/settings_api.dart';
 import 'package:booksly/domain/settings/settings.event.dart';
-import 'package:injectable/injectable.dart';
 import 'package:booksly/lib/utils/event_bus.dart';
 
 @singleton
