@@ -20,10 +20,7 @@ import 'package:booksly/domain/local_library/local_library.repository.dart'
 import 'package:booksly/domain/opds_library/opds_library.repository.dart'
     as _i8;
 import 'package:booksly/domain/settings/settings.repository.dart' as _i11;
-import 'package:booksly/view/app/navigation.cubit.dart' as _i14;
-import 'package:booksly/view/pages/local_library/local_library.view_model.dart'
-    as _i13;
-import 'package:booksly/view/pages/settings/settings.view_model.dart' as _i12;
+import 'package:booksly/view/app/navigation.cubit.dart' as _i12;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -47,14 +44,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i9.SettingsApi>(_i10.LocalSettingsApi());
     gh.singleton<_i11.SettingsRepository>(
         _i11.SettingsRepository(gh<_i9.SettingsApi>()));
-    gh.singleton<_i12.SettingsViewModel>(
-        _i12.SettingsViewModel(gh<_i11.SettingsRepository>()));
-    gh.factory<_i13.LocalLibraryViewModel>(() => _i13.LocalLibraryViewModel(
-          gh<_i11.SettingsRepository>(),
-          gh<_i5.LocalLibraryRepository>(),
-        ));
-    gh.factory<_i14.NavigationCubit>(
-        () => _i14.NavigationCubit(gh<_i11.SettingsRepository>()));
+    gh.factory<_i12.NavigationCubit>(
+        () => _i12.NavigationCubit(gh<_i11.SettingsRepository>()));
     return this;
   }
 }

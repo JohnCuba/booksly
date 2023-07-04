@@ -1,13 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:booksly/config/injector.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:booksly/view/pages/settings/components/opds_library_list_tile.component.dart';
 import 'package:booksly/view/pages/settings/components/opds_library_modal.component.dart';
 import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booksly/view/pages/settings/settings.view_model.dart';
+
+import 'view_model/settings.cubit.dart';
 
 @RoutePage(name: SettingsPage.name)
 class SettingsPage extends StatelessWidget {
@@ -19,7 +20,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt.get<SettingsViewModel>(),
+      create: (_) => SettingsCubit(),
       child: const SettingsView()
     );
   }
@@ -43,7 +44,7 @@ class SettingsView extends StatelessWidget {
 
   Widget _buildPage(BuildContext context) {
     final isLoading = context
-        .select((SettingsViewModel cubit) => cubit.state.settings == null);
+        .select((SettingsCubit cubit) => cubit.state.settings == null);
 
     switch (isLoading) {
       case true:
@@ -54,18 +55,18 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    final localLibraryPath = context.watch<SettingsViewModel>().state.settings!.localLibPath;
-    final opdsLibraries = context.watch<SettingsViewModel>().state.opdsLibraies;
+    final localLibraryPath = context.watch<SettingsCubit>().state.settings!.localLibPath;
+    final opdsLibraries = context.watch<SettingsCubit>().state.opdsLibraies;
 
     final handleClickSelectDirectory =
-        context.read<SettingsViewModel>().changeLocalLibraryPath;
-    final onRemoveLibrary = context.read<SettingsViewModel>().removeOpdsLibrary;
+        context.read<SettingsCubit>().changeLocalLibraryPath;
+    final onRemoveLibrary = context.read<SettingsCubit>().removeOpdsLibrary;
     
     handleClickAddOnlineLibrary() {
       showDialog(
           context: context,
           builder: (BuildContext ctx) => BlocProvider.value(
-            value: BlocProvider.of<SettingsViewModel>(context),
+            value: BlocProvider.of<SettingsCubit>(context),
             child: const OpdsLibraryModal()
           )
       );

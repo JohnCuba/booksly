@@ -1,12 +1,12 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:booksly/config/injector.dart';
-import 'package:booksly/view/pages/local_library/local_library.view_model.dart';
-import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
+
+import 'view_model/local_library.cubit.dart';
 
 @RoutePage(name: LocalLibraryPage.name)
 class LocalLibraryPage extends StatelessWidget {
@@ -18,8 +18,9 @@ class LocalLibraryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => getIt.get<LocalLibraryViewModel>(),
-        child: const LocalLibraryView());
+      create: (_) => LocalLibraryCubit(),
+      child: const LocalLibraryView()
+    );
   }
 }
 
@@ -28,7 +29,7 @@ class LocalLibraryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final handleClickRefresh = context.read<LocalLibraryViewModel>().update;
+    final handleClickRefresh = context.read<LocalLibraryCubit>().update;
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -48,7 +49,7 @@ class LocalLibraryView extends StatelessWidget {
   }
 
   Widget _buildPage(BuildContext context) {
-    final isLoading = context.watch<LocalLibraryViewModel>().state.isLoading;
+    final isLoading = context.watch<LocalLibraryCubit>().state.isLoading;
 
     switch (isLoading) {
       case true:
@@ -59,7 +60,7 @@ class LocalLibraryView extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    final files = context.watch<LocalLibraryViewModel>().state.files;
+    final files = context.watch<LocalLibraryCubit>().state.files;
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
@@ -67,7 +68,7 @@ class LocalLibraryView extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         itemCount: files.length,
         itemBuilder: (context, index) {
-          final onDeleteBook = context.read<LocalLibraryViewModel>().deleteBook;
+          final onDeleteBook = context.read<LocalLibraryCubit>().deleteBook;
 
           handleDelete() {
             onDeleteBook(files[index]);

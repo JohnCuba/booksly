@@ -1,4 +1,4 @@
-import 'package:booksly/view/pages/settings/settings.view_model.dart';
+import 'package:booksly/view/pages/settings/view_model/settings.cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class _OpdsLibraryModalState extends State<OpdsLibraryModal> {
 
   @override
   Widget build(BuildContext context) {
-    final onAddOpdsLibrary = context.read<SettingsViewModel>().addOpdsLibrary;
+    final onAddOpdsLibrary = context.read<SettingsCubit>().addOpdsLibrary;
 
     handleClickCancel() {
       Navigator.of(context).pop();

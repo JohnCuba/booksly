@@ -1,36 +1,21 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
+
+import 'package:booksly/config/injector.dart';
 import 'package:booksly/data/local_library/models/local_book.model.dart';
 import 'package:booksly/domain/local_library/local_library.repository.dart';
 import 'package:booksly/domain/settings/settings.event.dart';
-import 'package:injectable/injectable.dart';
-import 'package:equatable/equatable.dart';
 import 'package:booksly/domain/settings/settings.repository.dart';
 
-class LocalLibraryState extends Equatable {
-  final bool isLoading;
-  final String localLibPath;
-  final List<LocalBook> files;
+import 'local_library.state.dart';
 
-  const LocalLibraryState({
-    this.isLoading = true,
-    this.localLibPath = '',
-    this.files = const [],
-  });
-
-  @override
-  List<Object?> get props => [localLibPath];
-}
-
-@injectable
-class LocalLibraryViewModel extends Cubit<LocalLibraryState> {
-  final SettingsRepository _settingsRepository;
-  final LocalLibraryRepository _localLibraryRepository;
+class LocalLibraryCubit extends Cubit<LocalLibraryState> {
+  final LocalLibraryRepository _localLibraryRepository = getIt<LocalLibraryRepository>();
+  final SettingsRepository _settingsRepository = getIt<SettingsRepository>();
   final List<StreamSubscription> _listeners = [];
 
-  LocalLibraryViewModel(this._settingsRepository, this._localLibraryRepository)
-      : super(const LocalLibraryState()) {
+  LocalLibraryCubit() :
+  super(const LocalLibraryState(isLoading: false, localLibPath: '', files: [])) {
     _init();
   }
 
@@ -62,13 +47,18 @@ class LocalLibraryViewModel extends Cubit<LocalLibraryState> {
   }
 
   update() async {
-    emit(const LocalLibraryState());
+    emit(state.copyWith(isLoading: true));
     final localLibPath =
         await _settingsRepository.getSettings().then((value) => value.localLibPath);
 
     _localLibraryRepository.getBooks(localLibPath).then((value) {
-      emit(LocalLibraryState(
-          isLoading: false, localLibPath: localLibPath, files: value));
+      emit(
+        state.copyWith(
+          isLoading: false,
+          localLibPath: localLibPath,
+          files: value
+        )
+      );
     });
   }
 
