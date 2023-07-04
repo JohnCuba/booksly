@@ -7,7 +7,7 @@ String getValueFromXml(XmlNode doc, List<String> keys) {
 
     for (var key in keys) {
       try {
-        value = doc.findAllElements(key).map((e) => e.text).join(', ');
+        value = doc.findAllElements(key).map((e) => e.innerText).join(', ');
       } catch (error) {
         print(error.toString());
       }

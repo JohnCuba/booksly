@@ -21,7 +21,7 @@ class OpdsLibrary extends HiveObject {
   static Future<OpdsLibrary> parseUri(String uri) async {
     final response = await Dio().get(uri);
     final rootXml = XmlDocument.parse(response.data.toString());
-    final title = rootXml.findAllElements('title').first.text;
+    final title = rootXml.findAllElements('title').first.innerText;
     final slug = Translit().toTranslit(source: title.toLowerCase().replaceAll(' ', '_'));
 
     return OpdsLibrary(

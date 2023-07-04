@@ -9,7 +9,7 @@ class OpdsPage {
 
   OpdsPage(String responseData) {
     _xmlDocument = XmlDocument.parse(responseData);
-    title = _xmlDocument.findAllElements('title').first.text;
+    title = _xmlDocument.findAllElements('title').first.innerText;
     entries = _xmlDocument.findAllElements('entry').map((entry) => OpdsEntry(entry)).toList();
   }
 }
