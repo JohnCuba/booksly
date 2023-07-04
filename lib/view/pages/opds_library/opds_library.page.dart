@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booksly/view/pages/opds_library/components/entries_list.component.dart';
+import 'package:booksly/view/pages/opds_library/viev_model/opds_library.cubit.dart';
 import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'components/breadcrumb.component.dart';
-import 'state/opds_library.cubit.dart';
 
 @RoutePage(name: OpdsLibraryPage.name)
 class OpdsLibraryPage extends StatelessWidget {

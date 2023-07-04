@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booksly/data/opds/models/opds_link.model.dart';
 
-import '../state/opds_library.cubit.dart';
+import '../viev_model/opds_library.cubit.dart';
+
 
 class EntriesList extends StatelessWidget {
   const EntriesList({super.key});

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../state/opds_library.cubit.dart';
+import '../viev_model/opds_library.cubit.dart';
+
 
 class Breadcrumb extends StatelessWidget {
   const Breadcrumb({super.key});
