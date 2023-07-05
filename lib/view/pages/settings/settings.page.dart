@@ -59,9 +59,23 @@ class SettingsView extends StatelessWidget {
     final localLibraryPath = context.watch<SettingsCubit>().state.settings!.localLibPath;
     final opdsLibraries = context.watch<SettingsCubit>().state.opdsLibraies;
 
-    final handleClickSelectDirectory =
-        context.read<SettingsCubit>().changeLocalLibraryPath;
     final onRemoveLibrary = context.read<SettingsCubit>().removeOpdsLibrary;
+
+    onSelectDirectory(bool result) {
+      _showToast(
+        context,
+        tr('settings.select_directory_result.${result ? 1 : 0}'),
+      );
+    }
+
+    handleClickSelectDirectory() async {
+      final onChangeLocalLibraryPath =
+        context.read<SettingsCubit>().changeLocalLibraryPath;
+
+      final result = await onChangeLocalLibraryPath();
+
+      onSelectDirectory(result);
+    }
     
     handleClickAddOnlineLibrary() {
       showDialog(
@@ -106,6 +120,15 @@ class SettingsView extends StatelessWidget {
             },
           )
         ],
+      ),
+    );
+  }
+
+  _showToast(BuildContext context, String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(text),
       ),
     );
   }
