@@ -50,18 +50,15 @@ class LocalLibraryCubit extends Cubit<LocalLibraryState> {
 
   update() async {
     emit(state.copyWith(isLoading: true));
-    final localLibPath =
-        await _settingsRepository.getSettings().then((value) => value.localLibPath);
 
-    _localLibraryRepository.getBooks(localLibPath).then((value) {
-      emit(
-        state.copyWith(
-          isLoading: false,
-          localLibPath: localLibPath,
-          files: value
-        )
-      );
-    });
+    final localLibPath = await _settingsRepository.getLocalLibPath();
+    final files = await _localLibraryRepository.getBooks(localLibPath);
+
+    emit(state.copyWith(
+        isLoading: false,
+        localLibPath: localLibPath,
+        files: files
+    ));
   }
 
   deleteBook(LocalBook book) async {

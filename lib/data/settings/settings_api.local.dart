@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:hive/hive.dart';
+
 import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:booksly/data/settings/models/settings.model.dart';
 import 'package:booksly/data/settings/settings_api.dart';
-import 'package:hive/hive.dart';
-import 'package:injectable/injectable.dart';
 
 @Singleton(as: SettingsApi)
 class LocalSettingsApi implements SettingsApi {
@@ -30,6 +32,15 @@ class LocalSettingsApi implements SettingsApi {
     }
   }
 
+  _getDefaultSettings() async {
+    var localLibraryPath = await getDownloadsDirectory();
+    localLibraryPath ??= await getApplicationDocumentsDirectory();
+
+    return Settings(
+      localLibPath: localLibraryPath.path
+    );
+  }
+
   @override
   init() async {
     _registerAdapters();
@@ -39,7 +50,9 @@ class LocalSettingsApi implements SettingsApi {
   @override
   getSettings() async {
     if (hiveSettingsBox.isEmpty) {
-      await saveSettings(Settings());
+      await saveSettings(
+        await _getDefaultSettings()
+      );
     }
 
     return await hiveSettingsBox.get(hiveRootBoxName) ?? Settings();
