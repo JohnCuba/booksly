@@ -1,12 +1,14 @@
-import 'package:booksly/config/injector.dart';
+import 'package:injectable/injectable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:booksly/config/injector.dart';
 import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:booksly/domain/settings/settings.repository.dart';
 
 import 'settings.state.dart';
 
+@injectable
 class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepository _settingsRepository = getIt<SettingsRepository>();
 

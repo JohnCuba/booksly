@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/data/local_library/models/local_book.model.dart';
@@ -9,6 +10,7 @@ import 'package:booksly/domain/settings/settings.repository.dart';
 
 import 'local_library.state.dart';
 
+@injectable
 class LocalLibraryCubit extends Cubit<LocalLibraryState> {
   final LocalLibraryRepository _localLibraryRepository = getIt<LocalLibraryRepository>();
   final SettingsRepository _settingsRepository = getIt<SettingsRepository>();
