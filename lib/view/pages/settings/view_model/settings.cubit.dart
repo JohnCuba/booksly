@@ -27,14 +27,16 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   changeLocalLibraryPath() async {
-    String? result = await FilePicker.platform
+    final result = await FilePicker.platform
         .getDirectoryPath(dialogTitle: 'Укажи путь к электронной книге');
-
-    if (result != null) {
-      emit(state.copyWith(
-        settings: await _settingsRepository.saveSettings(localLibPath: result),
-      ));
+    
+    if (result == null) {
+      return;
     }
+
+    emit(state.copyWith(
+      settings: await _settingsRepository.saveSettings(result),
+    ));
   }
 
   addOpdsLibrary(String uri) async {

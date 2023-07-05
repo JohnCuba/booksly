@@ -24,6 +24,7 @@ dependencies:
   hive_flutter: ^1.1.0
   injectable: ^2.1.0
   intl: ^0.18.0
+  path_provider: ^2.0.15
   translit: ^2.0.1
   xml: ^6.2.2
 

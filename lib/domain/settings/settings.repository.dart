@@ -20,11 +20,9 @@ class SettingsRepository {
     return _settingsApi.getSettings();
   }
 
-  Future<Settings> saveSettings({String? localLibPath}) async {
-    final currentSettings = await _settingsApi.getSettings();
-
+  Future<Settings> saveSettings(String localLibPath) async {
     final settings = Settings(
-      localLibPath: localLibPath ?? currentSettings.localLibPath
+      localLibPath: localLibPath
     );
 
     await _settingsApi.saveSettings(settings);
