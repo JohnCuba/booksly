@@ -41,6 +41,16 @@ class LocalSettingsApi implements SettingsApi {
     );
   }
 
+  List<OpdsLibrary> _getDefaultLibraries() {
+    return [
+      OpdsLibrary(
+        uri: 'https://coollib.net/opds',
+        title: 'Coollib',
+        slug: 'coollib'
+      )
+    ];
+  }
+
   @override
   init() async {
     _registerAdapters();
@@ -70,6 +80,9 @@ class LocalSettingsApi implements SettingsApi {
 
   @override
   Future<List<OpdsLibrary>> getOpdsLibraries() async {
+    if (hiveOpdsLibrariesBox.isEmpty) {
+      await hiveOpdsLibrariesBox.addAll(_getDefaultLibraries());
+    }
 
     return hiveOpdsLibrariesBox.values.toList();
   }
