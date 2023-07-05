@@ -1,6 +1,6 @@
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/config/localization.dart';
-import 'package:booksly/view/app/navigation.cubit.dart';
+import 'package:booksly/view/navigation/navigation.cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<NavigationCubit>(
-              create: (_) => getIt.get<NavigationCubit>())
+            create: (_) => getIt.get<NavigationCubit>()
+          )
         ],
         child: EasyLocalization(
             supportedLocales: supportedLocales,

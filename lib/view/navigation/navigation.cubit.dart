@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:booksly/config/injector.dart';
 import 'package:booksly/domain/settings/settings.event.dart';
 import 'package:booksly/domain/settings/settings.repository.dart';
 import 'package:booksly/view/app/app_page.dart';
@@ -9,29 +10,18 @@ import 'package:booksly/view/navigation/router.dart';
 import 'package:booksly/view/pages/local_library/local_library.page.dart';
 import 'package:booksly/view/pages/settings/settings.page.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
-class NavigationState extends Equatable {
-  final int pageIndex;
-  final List<AppPage> pages;
-
-  const NavigationState({
-    required this.pageIndex,
-    required this.pages,
-  });
-
-  @override
-  List<Object?> get props => [pageIndex, pages];
-}
+import 'navigation.state.dart';
 
 @injectable
 class NavigationCubit extends Cubit<NavigationState> {
-  final SettingsRepository _settingsRepository;
+  final SettingsRepository _settingsRepository = getIt.get<SettingsRepository>();
   final AppRouter router = AppRouter();
   final List<StreamSubscription> _listeners = []; 
 
-  NavigationCubit(this._settingsRepository) : super(const NavigationState(pageIndex: 0, pages: [])) {
+  NavigationCubit() :
+  super(const NavigationState(pageIndex: 0, pages: [])) {
     _init();
     router.addListener(_routeChangeListener);
   }
@@ -69,8 +59,7 @@ class NavigationCubit extends Cubit<NavigationState> {
           .then((pages) => pages
           .map((page) => AppPage(name: page.title, path: '/opds/${page.slug}')));
 
-    emit(NavigationState(
-      pageIndex: state.pageIndex, 
+    emit(state.copyWith(
       pages: [
         AppPage(name: tr('pages.${LocalLibraryPage.name}'), path: LocalLibraryPage.path),
         ...libraryPages,
@@ -82,9 +71,8 @@ class NavigationCubit extends Cubit<NavigationState> {
   _routeChangeListener() {
     final pageIndex = state.pages.indexWhere((element) => element.path == router.current.match);
     emit(
-      NavigationState(
+      state.copyWith(
         pageIndex: max(pageIndex, 0),
-        pages: state.pages
       )
     );
   }
