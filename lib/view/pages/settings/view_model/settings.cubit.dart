@@ -41,11 +41,14 @@ class SettingsCubit extends Cubit<SettingsState> {
     return true;
   }
 
-  addOpdsLibrary(String uri) async {
-    await _settingsRepository.addOpdsLibrary(uri);
+  Future<OpdsLibrary> addOpdsLibrary(String uri) async {
+    final result = await _settingsRepository.addOpdsLibrary(uri);
+
     emit(state.copyWith(
       opdsLibraies: await _settingsRepository.getOpdsLibraries()
     ));
+
+    return result;
   }
 
   removeOpdsLibrary(OpdsLibrary library) async {

@@ -26,9 +26,17 @@ class LocalSettingsApi implements SettingsApi {
   _openBoxes() async {
     if (!Hive.isBoxOpen(hiveRootBoxName)) {
       hiveSettingsBox = await Hive.openLazyBox<Settings>(hiveRootBoxName);
+
+      if (hiveSettingsBox.isEmpty) {
+        await saveSettings(_getDefaultSettings());
+      }
     }
     if (!Hive.isBoxOpen(hiveOpdsLibrariesBoxName)) {
       hiveOpdsLibrariesBox = await Hive.openBox<OpdsLibrary>(hiveOpdsLibrariesBoxName);
+
+      if (hiveOpdsLibrariesBox.isEmpty) {
+        await hiveOpdsLibrariesBox.addAll(_getDefaultLibraries());
+      }
     }
   }
 
@@ -59,12 +67,6 @@ class LocalSettingsApi implements SettingsApi {
 
   @override
   getSettings() async {
-    if (hiveSettingsBox.isEmpty) {
-      await saveSettings(
-        await _getDefaultSettings()
-      );
-    }
-
     return await hiveSettingsBox.get(hiveRootBoxName) ?? Settings();
   }
 
@@ -80,10 +82,6 @@ class LocalSettingsApi implements SettingsApi {
 
   @override
   Future<List<OpdsLibrary>> getOpdsLibraries() async {
-    if (hiveOpdsLibrariesBox.isEmpty) {
-      await hiveOpdsLibrariesBox.addAll(_getDefaultLibraries());
-    }
-
     return hiveOpdsLibrariesBox.values.toList();
   }
   

@@ -1,11 +1,13 @@
-import 'package:booksly/view/pages/settings/view_model/settings.cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OpdsLibraryModal extends StatefulWidget {
-  const OpdsLibraryModal({super.key});
+  final Function(String uri) onAddOpdsLibrary;
+  const OpdsLibraryModal({
+    super.key,
+    required this.onAddOpdsLibrary,
+  });
 
   @override
   State<OpdsLibraryModal> createState() => _OpdsLibraryModalState();
@@ -27,15 +29,13 @@ class _OpdsLibraryModalState extends State<OpdsLibraryModal> {
 
   @override
   Widget build(BuildContext context) {
-    final onAddOpdsLibrary = context.read<SettingsCubit>().addOpdsLibrary;
-
     handleClickCancel() {
       Navigator.of(context).pop();
     }
 
     handleClickSave() async {
       if (isLinkValid) {
-        await onAddOpdsLibrary(linkEditingController.text);
+        await widget.onAddOpdsLibrary(linkEditingController.text);
         handleClickCancel();
       }
     }
