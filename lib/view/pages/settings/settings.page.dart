@@ -1,3 +1,4 @@
+import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,18 +60,59 @@ class SettingsView extends StatelessWidget {
     final localLibraryPath = context.watch<SettingsCubit>().state.settings!.localLibPath;
     final opdsLibraries = context.watch<SettingsCubit>().state.opdsLibraies;
 
-    final handleClickSelectDirectory =
+    onSelectDirectory(bool result) {
+      _showToast(
+        context,
+        tr('settings.select_directory_result.${result ? 1 : 0}'),
+      );
+    }
+
+    onRemoveCatalog(String title) {
+      _showToast(
+        context,
+        tr('settings.remove_catalog', args: [title]),
+      );
+    }
+
+    onAddOpdsLibrary(OpdsLibrary opdsLib) {
+      _showToast(
+        context,
+        tr('settings.add_catalog', args: [opdsLib.title]),
+      );
+    }
+
+    handleAddOpdsLibrary(String uri) async {
+      final addOpdsLibrary = context.read<SettingsCubit>().addOpdsLibrary;
+      final result = await addOpdsLibrary(uri);
+
+      onAddOpdsLibrary(result);
+    }
+
+    handleClickSelectDirectory() async {
+      final onChangeLocalLibraryPath =
         context.read<SettingsCubit>().changeLocalLibraryPath;
-    final onRemoveLibrary = context.read<SettingsCubit>().removeOpdsLibrary;
+
+      final result = await onChangeLocalLibraryPath();
+
+      onSelectDirectory(result);
+    }
     
     handleClickAddOnlineLibrary() {
       showDialog(
           context: context,
           builder: (BuildContext ctx) => BlocProvider.value(
             value: BlocProvider.of<SettingsCubit>(context),
-            child: const OpdsLibraryModal()
+            child: OpdsLibraryModal(
+              onAddOpdsLibrary: handleAddOpdsLibrary,
+            )
           )
       );
+    }
+
+    handleRemoveLibrary(OpdsLibrary lib) async {
+      final removeOpdsLibrary = context.read<SettingsCubit>().removeOpdsLibrary;
+      await removeOpdsLibrary(lib);
+      onRemoveCatalog(lib.title);
     }
 
     return Scaffold(
@@ -102,10 +144,20 @@ class SettingsView extends StatelessWidget {
             itemBuilder: (context, index) {
               return OpdsLibraryListTile(
                 libraryData: opdsLibraries[index],
-                onRemoveLibrary: onRemoveLibrary);
+                onRemoveLibrary: handleRemoveLibrary,
+              );
             },
           )
         ],
+      ),
+    );
+  }
+
+  _showToast(BuildContext context, String text) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(text),
       ),
     );
   }

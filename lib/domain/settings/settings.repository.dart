@@ -43,10 +43,12 @@ class SettingsRepository {
     return getOpdsLibraries().then((libList) => libList.firstWhere((lib) => lib.slug == slug));
   }
 
-  Future<void> addOpdsLibrary(String uri) async {
+  Future<OpdsLibrary> addOpdsLibrary(String uri) async {
     final opdLibrary = await OpdsLibrary.parseUri(uri);
     await _settingsApi.addOpdsLibrary(opdLibrary);
+
     eventBus.fire(OpdsLibrariesUpdate());
+    return opdLibrary;
   }
 
   Future<void> removeOpdsLibrary(OpdsLibrary library) async {

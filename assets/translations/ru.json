@@ -13,6 +13,12 @@
     "local_library_path": "Путь к вашей библиотеке",
     "online_libraries": "Онлайн библиотеки",
     "add_library": "Добавить библиотеку",
-    "uri_placeholder": "Введите адрес библиотеки"
+    "uri_placeholder": "Введите адрес библиотеки",
+    "select_directory_result": {
+      "0": "Библиотека не выбрана",
+      "1": "Библиотека изменена"
+    },
+    "remove_catalog": "Каталог {} удален",
+    "add_catalog": "Каталог {} добавлен"
   }
 }
