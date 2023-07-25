@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:booksly/view/app/view_models/download_manager/download_manager.cubit.dart';
 import 'package:booksly/view/pages/opds_library/components/entries_list.component.dart';
 import 'package:booksly/view/pages/opds_library/viev_model/opds_library.cubit.dart';
 import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
@@ -34,6 +35,7 @@ class OpdsLibraryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final libraryTitle = context.watch<OpdsLibraryCubit>().state.library?.title ?? '';
+    final downloads = context.watch<DownloadManagerCubit>().state.downloads;
 
     return Scaffold(
       appBar: AppBar(
@@ -41,6 +43,16 @@ class OpdsLibraryView extends StatelessWidget {
         toolbarHeight: 40,
         title: Text(libraryTitle),
         automaticallyImplyLeading: false,
+        actions: [
+          Center(
+            child: Badge(
+              isLabelVisible: downloads.isNotEmpty,
+              label: Text(downloads.length.toString()),
+              child: Icon(downloads.isEmpty ? Icons.download_done_rounded : Icons.download_rounded),
+            ),
+          ),
+          SizedBox(width: downloads.length.toString().length * 8)
+        ]
       ),
       body: _buildPage(context),
     );

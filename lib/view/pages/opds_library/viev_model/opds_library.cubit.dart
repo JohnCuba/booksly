@@ -3,15 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:booksly/domain/opds_library/opds_library.repository.dart';
 import 'package:booksly/domain/settings/settings.repository.dart';
-import 'package:booksly/domain/local_library/local_library.repository.dart';
-import 'package:booksly/data/opds/models/opds_link.model.dart';
 
 import 'opds_library.state.dart';
 
 class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
   final SettingsRepository _settingsRepository = getIt<SettingsRepository>();
   final OpdsLibraryRepository _opdsLibraryRepository = getIt<OpdsLibraryRepository>();
-  final LocalLibraryRepository _libraryRepository = getIt<LocalLibraryRepository>();
 
   OpdsLibraryCubit(String librarySlug) :
   super(const OpdsLibraryState(isLoading: true, history: [])) {
@@ -67,13 +64,5 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
     history.add(newHistoryRecord);
 
     _loadPage(history);
-  }
-
-  downloadBook(OpdsLinkDownload link, String title) async {
-    _libraryRepository.addToDownloadQueue(
-      link,
-      title,
-      await _settingsRepository.getLocalLibPath(),
-    );
   }
 }

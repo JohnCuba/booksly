@@ -1,5 +1,6 @@
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/config/localization.dart';
+import 'package:booksly/view/app/view_models/download_manager/download_manager.cubit.dart';
 import 'package:booksly/view/navigation/navigation.cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,10 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider<NavigationCubit>(
             create: (_) => getIt.get<NavigationCubit>()
-          )
+          ),
+          BlocProvider<DownloadManagerCubit>(
+            create: (_) => getIt.get<DownloadManagerCubit>()
+          ),
         ],
         child: EasyLocalization(
             supportedLocales: supportedLocales,
