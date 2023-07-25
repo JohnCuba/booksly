@@ -1,13 +1,13 @@
 import 'package:booksly/config/consts.dart';
 
-class DownloadEntity {
+class DownloadTask {
   final Uri uri;
   final String title;
   final SupportedExtensions extension;
   final String savePath;
   int progress = 0;
 
-  DownloadEntity({
+  DownloadTask({
     required this.uri,
     required this.title,
     required this.extension,

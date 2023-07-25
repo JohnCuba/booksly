@@ -1,3 +1,4 @@
+import 'package:booksly/view/app/view_models/download_manager/download_manager.cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booksly/data/opds/models/opds_link.model.dart';
@@ -49,7 +50,8 @@ class EntriesList extends StatelessWidget {
     }
 
     handleClick() {
-      final downloadBook = context.read<OpdsLibraryCubit>().downloadBook;
+      final downloadBook = context.read<DownloadManagerCubit>().downloadBook;
+
       downloadBook(links.first, title);
     }
 

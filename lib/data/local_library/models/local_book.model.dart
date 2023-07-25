@@ -24,6 +24,9 @@ class LocalBook {
 
     if (extension == SupportedExtensions.epub.name) {
       return _parseEpub(path);
+    } else if (extension == SupportedExtensions.fb2.name) {
+      // TODO: Add fb2 parser
+      return Future(() => LocalBook(file: File(path), title: 'title', author: 'author', description: 'description'));
     } else {
       throw Exception('Unsuported file');
     }

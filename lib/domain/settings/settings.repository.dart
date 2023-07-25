@@ -5,7 +5,7 @@ import 'package:booksly/domain/settings/settings.event.dart';
 import 'package:booksly/lib/utils/event_bus.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@injectable
 class SettingsRepository {
   final SettingsApi _settingsApi;
   final EventBus eventBus = EventBus();
@@ -30,7 +30,7 @@ class SettingsRepository {
     return _settingsApi.getSettings();
   }
 
-  getLocalLibPath() async {
+  Future<String> getLocalLibPath() async {
     final settings = await _settingsApi.getSettings();
     return settings.localLibPath;
   }
