@@ -9,6 +9,8 @@ environment:
 dependencies:
   common:
     path: '../packages/common'
+  download_manager:
+    path: '../packages/download_manager'
   archive: ^3.3.6
   auto_route: ^7.6.0
   bloc: ^8.1.0

@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/data/opds/models/opds_link.model.dart';
-import 'package:booksly/domain/download_manager/download_manager.events.dart';
-import 'package:booksly/domain/download_manager/download_manager.repository.dart';
 import 'package:booksly/domain/settings/settings.repository.dart';
+import 'package:download_manager/main.dart';
 import 'package:injectable/injectable.dart';
 
 import 'download_manager.state.dart';
@@ -47,6 +46,6 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   downloadBook(OpdsLinkDownload link, String title) async {
     final savePath = await _settingsRepository.getLocalLibPath();
 
-    _downloadManagerRepository.addToDownload(link, title, savePath);
+    _downloadManagerRepository.addToDownload(link.uri, title, savePath, link.extension.name);
   }
 }

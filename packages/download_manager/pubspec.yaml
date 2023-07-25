@@ -1,5 +1,5 @@
-name: common
-description: A bunch of common useful stuff.
+name: download_manager
+description: Download manager module.
 version: 1.0.0
 publish_to: none
 # repository: https://github.com/my_org/my_repo
@@ -9,8 +9,11 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  archive: ^3.3.7
-  xml: ^6.3.0
+  common:
+    path: '../common'
+  dio: ^5.3.0
+  injectable: ^2.1.2
+  translit: ^2.0.1
   # path: ^1.8.0
 
 dev_dependencies:

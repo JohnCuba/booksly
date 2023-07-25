@@ -1,9 +1,7 @@
-import 'package:booksly/config/consts.dart';
-
 class DownloadTask {
   final Uri uri;
   final String title;
-  final SupportedExtensions extension;
+  final String extension;
   final String savePath;
   int progress = 0;
 

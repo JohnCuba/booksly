@@ -1,9 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:booksly/data/downloader/downloader.api.dart';
-import 'package:booksly/data/opds/models/opds_link.model.dart';
-import 'package:booksly/data/downloader/models/download_task.model.dart';
 import 'package:common/extensions/main.dart';
 
+import '../models/download_task.model.dart';
+import '../services/downloader.api.dart';
 import 'download_manager.events.dart';
 
 @injectable
@@ -24,11 +23,11 @@ class DownloadManagerRepository {
     eventBus.fire(DownloadQueueUpdated());
   }
 
-  addToDownload(OpdsLinkDownload link, String title, String savePath) {
+  addToDownload(Uri uri, String title, String savePath, String extension) {
     final task = DownloadTask(
-      uri: link.uri,
+      uri: uri,
       title: title,
-      extension: link.extension,
+      extension: extension,
       savePath: savePath,
     );
 
