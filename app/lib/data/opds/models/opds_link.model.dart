@@ -1,6 +1,7 @@
-import 'package:booksly/config/consts.dart';
 import 'package:xml/xml.dart';
 import 'dart:developer' as developer;
+
+import 'package:common/config/supported_extensions.dart';
 
 class OpdsLink {
   late final Uri uri;

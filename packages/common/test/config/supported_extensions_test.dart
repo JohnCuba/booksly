@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:booksly/config/consts.dart';
+import 'package:common/config/supported_extensions.dart';
 
 void main() {
   group('SupportedExtensions', () {

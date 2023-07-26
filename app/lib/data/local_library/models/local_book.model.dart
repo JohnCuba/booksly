@@ -1,8 +1,8 @@
 import 'dart:io';
 
+import 'package:common/config/supported_extensions.dart';
 import 'package:common/epub/main.dart' as epub_common;
 import 'package:common/xml/main.dart' as xml_common;
-import 'package:booksly/config/consts.dart';
 
 final RegExp _fileExtension = RegExp(r'(?=.)[0-9a-z]+$');
 
