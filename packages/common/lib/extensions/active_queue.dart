@@ -67,10 +67,10 @@ class ActiveQueue<T> {
     final needToActivate = parallels - active.length;
     final entitiesToActivate = pended.take(needToActivate);
 
-    entitiesToActivate.forEach((entity) {
+    for (var entity in entitiesToActivate) {
       entity.status = EntityStatus.active;
       entity.future = _runTask(entity);
-    });
+    }
 
     if (entitiesToActivate.isEmpty) {
       return false;
