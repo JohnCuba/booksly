@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
-options: "b9903571b83fe7d57b2bf9987dd2c3aa1839c3f0113395380c93c8f65ead950f"
-build_start_time: [1690296868, 243180000]
-build_end_time: [1690296880, 533553000]
-inputs:
-  "/Users/lecube/Development/self/booksly/app/macos/Flutter/GeneratedPluginRegistrant.swift": [1690296799, 41118283]
-  "/Users/lecube/Development/self/booksly/app/macos/Runner/AppDelegate.swift": [1653017493, 0]
-  "/Users/lecube/Development/self/booksly/app/macos/Runner/MainFlutterWindow.swift": [1676191123, 138065562]

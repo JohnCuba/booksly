@@ -1,7 +1,0 @@
-version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
-options: "0b142f550077a76f752e63487fe659e5eebefb2fb1bfc21e504cddb14c4b13a9"
-build_start_time: [1690296825, 9576000]
-build_end_time: [1690296825, 97935000]
-inputs:
-  "/Users/lecube/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3/darwin/Classes/PathProviderPlugin.swift": !private [1688226253, 278342212]
-  "/Users/lecube/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3/darwin/Classes/messages.g.swift": !private [1688226253, 276101854]
