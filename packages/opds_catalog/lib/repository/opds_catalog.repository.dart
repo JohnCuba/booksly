@@ -1,16 +1,16 @@
-import 'package:booksly/data/opds/models/opds_page.model.dart';
-import 'package:booksly/data/opds/opds_api.dart';
-import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:injectable/injectable.dart';
+import 'package:opds_catalog/main.dart';
+import 'package:opds_catalog/services/opds_api.dart';
+import 'package:settings/main.dart';
 
 @injectable
-class OpdsLibraryRepository {
+class OpdsCatalogRepository {
   final OpdsApi _opdsApi;
   late final OpdsLibrary _library;
   String get libraryTitle  => _library.title;
   String get libraryBasePath => _opdsApi.basePath;
 
-  OpdsLibraryRepository(this._opdsApi);
+  OpdsCatalogRepository(this._opdsApi);
 
   void init(OpdsLibrary library) {
     _library = library;

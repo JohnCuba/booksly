@@ -1,11 +1,11 @@
 import 'dart:async';
-
-import 'package:bloc/bloc.dart';
-import 'package:booksly/config/injector.dart';
-import 'package:booksly/data/opds/models/opds_link.model.dart';
-import 'package:booksly/domain/settings/settings.repository.dart';
-import 'package:download_manager/main.dart';
 import 'package:injectable/injectable.dart';
+import 'package:bloc/bloc.dart';
+
+import 'package:booksly/config/injector.dart';
+import 'package:download_manager/main.dart';
+import 'package:opds_catalog/main.dart';
+import 'package:settings/main.dart';
 
 import 'download_manager.state.dart';
 

@@ -3,14 +3,13 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:booksly/config/injector.dart';
-import 'package:booksly/domain/settings/settings.event.dart';
-import 'package:booksly/domain/settings/settings.repository.dart';
 import 'package:booksly/view/app/app_page.dart';
 import 'package:booksly/view/navigation/router.dart';
 import 'package:booksly/view/pages/local_library/local_library.page.dart';
 import 'package:booksly/view/pages/settings/settings.page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:injectable/injectable.dart';
+import 'package:settings/main.dart';
 
 import 'navigation.state.dart';
 

@@ -3,9 +3,8 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:booksly/config/injector.dart';
-import 'package:booksly/domain/settings/settings.event.dart';
-import 'package:booksly/domain/settings/settings.repository.dart';
 import 'package:local_library/main.dart';
+import 'package:settings/main.dart';
 
 import 'local_library.state.dart';
 

@@ -1,7 +1,7 @@
-name: download_manager
-description: Download manager module.
+name: opds_catalog
+description: Opds catalog module.
 version: 1.0.0
-publish_to: none
+publish_to: 'none'
 # repository: https://github.com/my_org/my_repo
 
 environment:
@@ -11,10 +11,12 @@ environment:
 dependencies:
   common:
     path: '../common'
+  settings:
+    path: '../settings'
   dio: ^5.3.0
-  get_it: ^7.6.0
   injectable: ^2.1.2
-  translit: ^2.0.1
+  xml: ^6.3.0
+  get_it: ^7.6.0
   # path: ^1.8.0
 
 dev_dependencies:

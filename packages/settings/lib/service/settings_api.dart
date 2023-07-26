@@ -1,5 +1,4 @@
-import 'package:booksly/data/settings/models/opds_library.model.dart';
-import 'package:booksly/data/settings/models/settings.model.dart';
+import 'package:settings/main.dart';
 
 abstract class SettingsApi {
   const SettingsApi();

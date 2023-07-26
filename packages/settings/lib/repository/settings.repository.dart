@@ -1,9 +1,9 @@
-import 'package:booksly/data/settings/models/opds_library.model.dart';
-import 'package:booksly/data/settings/models/settings.model.dart';
-import 'package:booksly/data/settings/settings_api.dart';
-import 'package:booksly/domain/settings/settings.event.dart';
 import 'package:injectable/injectable.dart';
 import 'package:common/extensions/main.dart';
+import 'package:settings/main.dart';
+import 'package:settings/service/settings_api.dart';
+
+import 'settings.event.dart';
 
 @injectable
 class SettingsRepository {

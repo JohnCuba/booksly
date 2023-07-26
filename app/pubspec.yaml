@@ -13,6 +13,10 @@ dependencies:
     path: '../packages/download_manager'
   local_library:
     path: '../packages/local_library'
+  opds_catalog:
+    path: '../packages/opds_catalog'
+  settings:
+    path: '../packages/settings'
   archive: ^3.3.6
   auto_route: ^7.6.0
   bloc: ^8.1.0

@@ -3,8 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:booksly/config/injector.dart';
-import 'package:booksly/data/settings/models/opds_library.model.dart';
-import 'package:booksly/domain/settings/settings.repository.dart';
+import 'package:settings/main.dart';
 
 import 'settings.state.dart';
 

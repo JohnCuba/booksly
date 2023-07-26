@@ -11,9 +11,12 @@ environment:
 dependencies:
   common:
     path: '../common'
+  get_it: ^7.6.0
   injectable: ^2.1.2
   # path: ^1.8.0
 
 dev_dependencies:
+  build_runner: ^2.4.6
+  injectable_generator: ^2.1.6
   lints: ^2.0.0
   test: ^1.21.0

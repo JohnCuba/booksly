@@ -1,6 +1,6 @@
-import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:settings/main.dart';
 
 class OpdsLibraryListTile extends StatefulWidget {
   final OpdsLibrary libraryData;

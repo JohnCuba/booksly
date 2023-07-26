@@ -1,4 +1,3 @@
-import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +8,7 @@ import 'package:booksly/config/injector.dart';
 import 'package:booksly/view/pages/settings/components/opds_library_list_tile.component.dart';
 import 'package:booksly/view/pages/settings/components/opds_library_modal.component.dart';
 import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
+import 'package:settings/main.dart';
 
 import 'view_model/settings.cubit.dart';
 

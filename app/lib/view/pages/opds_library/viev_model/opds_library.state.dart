@@ -1,6 +1,6 @@
-import 'package:booksly/data/opds/models/opds_page.model.dart';
-import 'package:booksly/data/settings/models/opds_library.model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:opds_catalog/main.dart';
+import 'package:settings/main.dart';
 
 part 'opds_library.state.freezed.dart';
 

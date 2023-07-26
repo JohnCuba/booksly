@@ -1,6 +1,5 @@
-import 'package:booksly/data/settings/models/opds_library.model.dart';
-
-import 'models/opds_page.model.dart';
+import 'package:opds_catalog/models/opds_page.model.dart';
+import 'package:settings/main.dart';
 
 abstract class OpdsApi {
   const OpdsApi(OpdsLibrary library);

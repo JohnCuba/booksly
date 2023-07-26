@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'models/opds_page.model.dart';
+import 'package:opds_catalog/models/opds_page.model.dart';
 import 'opds_api.dart';
 
 @Injectable(as: OpdsApi)

@@ -554,6 +554,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  opds_catalog:
+    dependency: "direct main"
+    description:
+      path: "../packages/opds_catalog"
+      relative: true
+    source: path
+    version: "1.0.0"
   package_config:
     dependency: transitive
     description:
@@ -698,6 +705,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  settings:
+    dependency: "direct main"
+    description:
+      path: "../packages/settings"
+      relative: true
+    source: path
+    version: "1.0.0"
   shared_preferences:
     dependency: transitive
     description:

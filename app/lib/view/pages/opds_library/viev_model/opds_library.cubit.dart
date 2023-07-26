@@ -1,14 +1,13 @@
 import 'package:booksly/config/injector.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booksly/data/settings/models/opds_library.model.dart';
-import 'package:booksly/domain/opds_library/opds_library.repository.dart';
-import 'package:booksly/domain/settings/settings.repository.dart';
+import 'package:opds_catalog/main.dart';
+import 'package:settings/main.dart';
 
 import 'opds_library.state.dart';
 
 class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
   final SettingsRepository _settingsRepository = getIt<SettingsRepository>();
-  final OpdsLibraryRepository _opdsLibraryRepository = getIt<OpdsLibraryRepository>();
+  final OpdsCatalogRepository _opdsCatalogRepository = getIt<OpdsCatalogRepository>();
 
   OpdsLibraryCubit(String librarySlug) :
   super(const OpdsLibraryState(isLoading: true, history: [])) {
@@ -18,11 +17,11 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
   _init(String slug) async {
     await _settingsRepository.init();
     final OpdsLibrary library = await _getOpdsLibrary(slug);
-    _opdsLibraryRepository.init(library);
-    final page = await _opdsLibraryRepository.loadPage();
+    _opdsCatalogRepository.init(library);
+    final page = await _opdsCatalogRepository.loadPage();
     final history = [...state.history];
     history.add(HistoryRecord(
-      uri: Uri.parse(_opdsLibraryRepository.libraryBasePath),
+      uri: Uri.parse(_opdsCatalogRepository.libraryBasePath),
       title: 'Home',
     ));
 
@@ -41,7 +40,7 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
   _loadPage(List<HistoryRecord> history) async {
     emit(state.copyWith(isLoading: true));
 
-    final page = await _opdsLibraryRepository.loadPage(history.last.uri);
+    final page = await _opdsCatalogRepository.loadPage(history.last.uri);
 
     emit(state.copyWith(
       isLoading: false,

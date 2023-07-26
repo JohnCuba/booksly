@@ -1,7 +1,7 @@
 import 'package:booksly/view/app/view_models/download_manager/download_manager.cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booksly/data/opds/models/opds_link.model.dart';
+import 'package:opds_catalog/main.dart';
 
 import '../viev_model/opds_library.cubit.dart';
 
