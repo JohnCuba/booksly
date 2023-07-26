@@ -1,5 +1,5 @@
-import 'package:booksly/data/local_library/models/local_book.model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:local_library/main.dart';
 
 part 'local_library.state.freezed.dart';
 

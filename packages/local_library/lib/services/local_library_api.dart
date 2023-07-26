@@ -1,4 +1,4 @@
-import 'package:booksly/data/local_library/models/local_book.model.dart';
+import 'package:local_library/models/local_book.model.dart';
 
 abstract class LocalLibraryApi {
   const LocalLibraryApi();
