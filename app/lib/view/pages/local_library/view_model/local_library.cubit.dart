@@ -29,8 +29,11 @@ class LocalLibraryCubit extends Cubit<LocalLibraryState> {
   _registerListeners() {
     _listeners.add(
       _settingsRepository.eventBus.on<SettingsUpdate>()
-        .listen((event) {
-          update();
+        .listen((event) async {
+          emit(state.copyWith(
+            localLibPath: event.payload.localLibPath,
+            files: await _localLibraryRepository.getBooks(event.payload.localLibPath),
+          ));
         })
     );
   }

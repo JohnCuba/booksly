@@ -1,5 +1,10 @@
-abstract class SettingsRepositryEvent {}
+import 'package:settings/models/main.dart';
 
-class SettingsUpdate implements SettingsRepositryEvent {}
+abstract class SettingsRepositoryEvent {}
 
-class OpdsLibrariesUpdate implements SettingsRepositryEvent {}
+class SettingsUpdate implements SettingsRepositoryEvent {
+  final Settings payload;
+  SettingsUpdate(this.payload);
+}
+
+class OpdsLibrariesUpdate implements SettingsRepositoryEvent {}

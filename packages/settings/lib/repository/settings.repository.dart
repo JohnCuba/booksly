@@ -33,7 +33,7 @@ class SettingsRepository {
     await _settingsApi.then((value) => value.saveSettings(settings));
     final newSettings = await _settingsApi.then((value) => value.getSettings());
 
-    eventBus.fire(SettingsUpdate());
+    eventBus.fire(SettingsUpdate(newSettings));
 
     return newSettings;
   }
