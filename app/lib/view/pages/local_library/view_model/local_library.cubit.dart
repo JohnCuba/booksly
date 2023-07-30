@@ -16,19 +16,14 @@ class LocalLibraryCubit extends Cubit<LocalLibraryState> {
 
   LocalLibraryCubit() :
   super(const LocalLibraryState(isLoading: false, localLibPath: '', files: [])) {
-    _init();
+    _registerListeners();
+    update();
   }
 
   @override
   close() async {
     _cancelListeners();
     super.close();
-  }
-
-  _init() async {
-    await _settingsRepository.init();
-    _registerListeners();
-    update();
   }
 
   _registerListeners() {
@@ -49,12 +44,12 @@ class LocalLibraryCubit extends Cubit<LocalLibraryState> {
   update() async {
     emit(state.copyWith(isLoading: true));
 
-    final localLibPath = await _settingsRepository.getLocalLibPath();
-    final files = await _localLibraryRepository.getBooks(localLibPath);
+    final settings = await _settingsRepository.getSettings();
+    final files = await _localLibraryRepository.getBooks(settings.localLibPath);
 
     emit(state.copyWith(
         isLoading: false,
-        localLibPath: localLibPath,
+        localLibPath: settings.localLibPath,
         files: files
     ));
   }

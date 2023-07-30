@@ -15,7 +15,6 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
   }
 
   _init(String slug) async {
-    await _settingsRepository.init();
     final OpdsLibrary library = await _getOpdsLibrary(slug);
     _opdsCatalogRepository.init(library);
     final page = await _opdsCatalogRepository.loadPage();

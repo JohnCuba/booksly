@@ -29,8 +29,7 @@ _i1.GetIt init(
     environment,
     environmentFilter,
   );
-  gh.lazySingleton<_i3.SettingsApi>(() => _i4.LocalSettingsApi());
-  gh.factory<_i5.SettingsRepository>(
-      () => _i5.SettingsRepository(gh<_i3.SettingsApi>()));
+  gh.lazySingletonAsync<_i3.SettingsApi>(() => _i4.LocalSettingsApi.init());
+  gh.singleton<_i5.SettingsRepository>(_i5.SettingsRepository());
   return getIt;
 }

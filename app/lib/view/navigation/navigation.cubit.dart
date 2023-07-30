@@ -32,7 +32,6 @@ class NavigationCubit extends Cubit<NavigationState> {
   }
 
   _init() async {
-    await _settingsRepository.init();
     _registerListeners();
     _updateAppPages();
   }
@@ -56,7 +55,7 @@ class NavigationCubit extends Cubit<NavigationState> {
   _updateAppPages() async {
     final libraryPages = await _settingsRepository.getOpdsLibraries()
           .then((pages) => pages
-          .map((page) => AppPage(name: page.title, path: '/opds/${page.slug}')));
+            .map((page) => AppPage(name: page.title, path: '/opds/${page.slug}')));
 
     emit(state.copyWith(
       pages: [

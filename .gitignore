@@ -42,3 +42,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Generable files
+**/injector.config.dart
+**/di.config.dart
+**/*.state.freezed.dart
+**/*.gr.dart

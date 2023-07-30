@@ -44,8 +44,8 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
   }
 
   downloadBook(OpdsLinkDownload link, String title) async {
-    final savePath = await _settingsRepository.getLocalLibPath();
+    final settings = await _settingsRepository.getSettings();
 
-    _downloadManagerRepository.addToDownload(link.uri, title, savePath, link.extension.name);
+    _downloadManagerRepository.addToDownload(link.uri, title, settings.localLibPath, link.extension.name);
   }
 }

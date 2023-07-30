@@ -17,8 +17,6 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
   _init() async {
-    await _settingsRepository.init();
-
     emit(state.copyWith(
       settings: await _settingsRepository.getSettings(),
       opdsLibraies: await _settingsRepository.getOpdsLibraries()
@@ -34,7 +32,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
 
     emit(state.copyWith(
-      settings: await _settingsRepository.saveSettings(result),
+      settings: await _settingsRepository.saveLocalLibPath(result),
     ));
 
     return true;

@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:hive/hive.dart';
 
 import 'package:settings/models/main.dart';
@@ -9,10 +8,15 @@ import 'settings_api.dart';
 class LocalSettingsApi implements SettingsApi {
   static const String hiveRootBoxName = 'settings';
   static const String hiveOpdsLibrariesBoxName = '${hiveRootBoxName}_opdsLibraries';
-  late LazyBox<Settings> hiveSettingsBox;
-  late Box<OpdsLibrary> hiveOpdsLibrariesBox;
+  final LazyBox<Settings> hiveSettingsBox;
+  final Box<OpdsLibrary> hiveOpdsLibrariesBox;
 
-  _registerAdapters() {
+  LocalSettingsApi({
+    required this.hiveSettingsBox,
+    required this.hiveOpdsLibrariesBox,
+  });
+
+  static _registerAdapters() {
     if (!Hive.isAdapterRegistered(SettingsAdapter().typeId)) {
       Hive.registerAdapter(SettingsAdapter());
     }
@@ -22,46 +26,14 @@ class LocalSettingsApi implements SettingsApi {
     }
   }
 
-  _openBoxes() async {
-    if (!Hive.isBoxOpen(hiveRootBoxName)) {
-      hiveSettingsBox = await Hive.openLazyBox<Settings>(hiveRootBoxName);
-
-      if (hiveSettingsBox.isEmpty) {
-        await saveSettings(_getDefaultSettings());
-      }
-    }
-    if (!Hive.isBoxOpen(hiveOpdsLibrariesBoxName)) {
-      hiveOpdsLibrariesBox = await Hive.openBox<OpdsLibrary>(hiveOpdsLibrariesBoxName);
-
-      if (hiveOpdsLibrariesBox.isEmpty) {
-        await hiveOpdsLibrariesBox.addAll(_getDefaultLibraries());
-      }
-    }
-  }
-
-  _getDefaultSettings() async {
-    var localLibraryPath = await getDownloadsDirectory();
-    localLibraryPath ??= await getApplicationDocumentsDirectory();
-
-    return Settings(
-      localLibPath: localLibraryPath.path
-    );
-  }
-
-  List<OpdsLibrary> _getDefaultLibraries() {
-    return [
-      OpdsLibrary(
-        uri: 'https://coollib.net/opds',
-        title: 'Coollib',
-        slug: 'coollib'
-      )
-    ];
-  }
-
-  @override
-  init() async {
+  @factoryMethod
+  static Future<LocalSettingsApi> init() async {
     _registerAdapters();
-    await _openBoxes();
+
+    return LocalSettingsApi(
+      hiveSettingsBox: await Hive.openLazyBox<Settings>(hiveRootBoxName),
+      hiveOpdsLibrariesBox: await Hive.openBox<OpdsLibrary>(hiveOpdsLibrariesBoxName),
+    );
   }
 
   @override

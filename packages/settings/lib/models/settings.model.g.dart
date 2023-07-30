@@ -18,15 +18,18 @@ class SettingsAdapter extends TypeAdapter<Settings> {
     };
     return Settings(
       localLibPath: fields[0] == null ? '' : fields[0] as String,
+      isAlreadyCalled: fields[1] == null ? false : fields[1] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.localLibPath);
+      ..write(obj.localLibPath)
+      ..writeByte(1)
+      ..write(obj.isAlreadyCalled);
   }
 
   @override

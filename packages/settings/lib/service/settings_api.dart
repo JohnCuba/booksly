@@ -3,8 +3,6 @@ import 'package:settings/main.dart';
 abstract class SettingsApi {
   const SettingsApi();
 
-  Future<void> init();
-
   Future<Settings> getSettings();
   Future<void> saveSettings(Settings data);
 

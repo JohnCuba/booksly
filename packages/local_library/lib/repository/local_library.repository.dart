@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:local_library/models/local_book.model.dart';
 import 'package:local_library/services/local_library_api.dart';
 
-@singleton
+@injectable
 class LocalLibraryRepository {
   final LocalLibraryApi _localLibraryApi;
 

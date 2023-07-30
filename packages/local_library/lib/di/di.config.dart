@@ -30,7 +30,7 @@ _i1.GetIt init(
     environmentFilter,
   );
   gh.factory<_i3.LocalLibraryApi>(() => _i4.LocalLibraryLocal());
-  gh.singleton<_i5.LocalLibraryRepository>(
-      _i5.LocalLibraryRepository(gh<_i3.LocalLibraryApi>()));
+  gh.factory<_i5.LocalLibraryRepository>(
+      () => _i5.LocalLibraryRepository(gh<_i3.LocalLibraryApi>()));
   return getIt;
 }
