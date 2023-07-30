@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
+import 'package:booksly/shared/loading/loading_indicator.component.dart';
 
 import 'view_model/local_library.cubit.dart';
 

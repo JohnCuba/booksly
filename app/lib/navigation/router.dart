@@ -1,8 +1,8 @@
-import 'package:booksly/view/pages/opds_library/opds_library.page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:booksly/view/pages/local_library/local_library.page.dart';
-import 'package:booksly/view/pages/settings/settings.page.dart';
+import 'package:booksly/pages/local_library/local_library.page.dart';
+import 'package:booksly/pages/settings/settings.page.dart';
+import 'package:booksly/pages/opds_library/opds_library.page.dart';
 
 part 'router.gr.dart';
 

@@ -1,4 +1,4 @@
-import 'package:booksly/view/app/app_page.dart';
+import 'package:booksly/app/app_page.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'navigation.state.freezed.dart';

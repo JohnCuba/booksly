@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:booksly/config/injector.dart';
-import 'package:booksly/view/app/app_page.dart';
-import 'package:booksly/view/navigation/router.dart';
-import 'package:booksly/view/pages/local_library/local_library.page.dart';
-import 'package:booksly/view/pages/settings/settings.page.dart';
+import 'package:booksly/app/app_page.dart';
+import 'package:booksly/navigation/router.dart';
+import 'package:booksly/pages/local_library/local_library.page.dart';
+import 'package:booksly/pages/settings/settings.page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:injectable/injectable.dart';
 import 'package:settings/main.dart';

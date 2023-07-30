@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:booksly/config/injector.dart';
-import 'package:booksly/view/pages/settings/components/opds_library_list_tile.component.dart';
-import 'package:booksly/view/pages/settings/components/opds_library_modal.component.dart';
-import 'package:booksly/view/shared/loading/loading_indicator.component.dart';
+import 'package:booksly/pages/settings/components/opds_library_list_tile.component.dart';
+import 'package:booksly/pages/settings/components/opds_library_modal.component.dart';
+import 'package:booksly/shared/loading/loading_indicator.component.dart';
 import 'package:settings/main.dart';
 
 import 'view_model/settings.cubit.dart';

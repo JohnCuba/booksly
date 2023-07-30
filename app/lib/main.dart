@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:booksly/view/app/app.view.dart';
+import 'package:booksly/app/app.view.dart';
 import 'config/injector.dart';
 
 void main() async {
