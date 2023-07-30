@@ -10,7 +10,7 @@ import 'settings.event.dart';
 @singleton
 class SettingsRepository {
   Future<SettingsApi> get _settingsApi => GetIt.I.getAsync<SettingsApi>();
-  final EventBus eventBus = EventBus();
+  final EventBus<SettingsRepositoryEvent> eventBus = EventBus<SettingsRepositoryEvent>();
 
   SettingsRepository() {
     initDefaults();

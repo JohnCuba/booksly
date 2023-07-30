@@ -8,7 +8,7 @@ import 'download_manager.events.dart';
 @injectable
 class DownloadManagerRepository {
   final DownloaderApi _downloaderApi;
-  final EventBus eventBus = EventBus();
+  final EventBus<DownloadManagerEvent> eventBus = EventBus<DownloadManagerEvent>();
   late ActiveQueue<DownloadTask> _downloadQueue;
   List<ActiveQueueEntity<DownloadTask>> get downloads => _downloadQueue.queue;
 

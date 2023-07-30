@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer' as developer;
 
-class EventBus {
+class EventBus<EventType> {
   final StreamController _streamController;
 
   EventBus() : _streamController = StreamController.broadcast(sync: false);
@@ -11,7 +11,7 @@ class EventBus {
     return _streamController.stream.where((event) => event is T).cast<T>();
   }
 
-  void fire(event) {
+  void fire(EventType event) {
     developer.log('[EventBus]: Fire event ${event.runtimeType}', name: 'DEBUG');
     _streamController.add(event);
   }
