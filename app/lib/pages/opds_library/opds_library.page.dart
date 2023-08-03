@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:booksly/app/view_models/download_manager/download_manager.cubit.dart';
 import 'package:booksly/pages/opds_library/components/entries_list.component.dart';
 import 'package:booksly/pages/opds_library/viev_model/opds_library.cubit.dart';
 import 'package:booksly/shared/loading/loading_indicator.component.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:booksly/shared/downloads_dropdown/main.dart';
 
 import 'components/breadcrumb.component.dart';
 
@@ -44,13 +45,7 @@ class OpdsLibraryView extends StatelessWidget {
         title: Text(libraryTitle),
         automaticallyImplyLeading: false,
         actions: [
-          Center(
-            child: Badge(
-              isLabelVisible: downloads.isNotEmpty,
-              label: Text(downloads.length.toString()),
-              child: Icon(downloads.isEmpty ? Icons.download_done_rounded : Icons.download_rounded),
-            ),
-          ),
+          DownloadsDropdown(list: downloads),
           SizedBox(width: downloads.length.toString().length * 8)
         ]
       ),

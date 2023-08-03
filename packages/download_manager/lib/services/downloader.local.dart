@@ -10,7 +10,7 @@ class DownloaderLocal implements DownloaderApi {
   final Dio _dio = Dio();
 
   @override
-  downloadBook(entity) async {
+  downloadBook(entity, onReceiveProgress) async {
     final savePath = p.join(
         entity.savePath,
         Translit().toTranslit(source: '${entity.title}.${entity.extension}'),
@@ -19,6 +19,12 @@ class DownloaderLocal implements DownloaderApi {
     await _dio.downloadUri(
         entity.uri,
         savePath,
+        onReceiveProgress: (received, total) {
+          if (total != -1) {
+            entity.progress = received / total;
+          }
+          onReceiveProgress!();
+        },
     );
   }
 }

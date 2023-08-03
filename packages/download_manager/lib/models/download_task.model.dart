@@ -3,7 +3,7 @@ class DownloadTask {
   final String title;
   final String extension;
   final String savePath;
-  int progress = 0;
+  double progress = 0;
 
   DownloadTask({
     required this.uri,
@@ -12,7 +12,7 @@ class DownloadTask {
     required this.savePath,
   });
 
-  updateProgress(int value) {
+  updateProgress(double value) {
     progress = value;
   }
 }

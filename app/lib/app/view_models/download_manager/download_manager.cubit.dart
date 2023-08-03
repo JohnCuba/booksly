@@ -38,7 +38,11 @@ class DownloadManagerCubit extends Cubit<DownloadManagerState> {
     _listeners.add(
       _downloadManagerRepository.eventBus.on<DownloadQueueUpdated>()
         .listen((event) {
-          emit(state.copyWith(downloads: _downloadManagerRepository.downloads));
+          emit(
+            state.copyWith(
+              downloads: _downloadManagerRepository.downloads.map((e) => DownloadEntityState(task: e.data, progress: e.data.progress)).toList()
+            )
+          );
         })
     );
   }

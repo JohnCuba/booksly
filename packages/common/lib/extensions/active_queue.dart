@@ -22,7 +22,7 @@ class ActiveQueue<T> {
   final Queue<ActiveQueueEntity<T>> _queue = Queue();
   List<ActiveQueueEntity<T>> get queue => _queue.toList();
 
-  final Future<dynamic> Function(T entity) runner;
+  final Future<dynamic> Function(T entity, Function()? onReceiveProgress) runner;
   final int parallels;
   late Function()? onUpdate;
 
@@ -32,14 +32,8 @@ class ActiveQueue<T> {
     this.onUpdate,
   });
 
-  _onUpdate() {
-    if (onUpdate != null) {
-      onUpdate!();
-    }
-  }
-
   _runTask(ActiveQueueEntity<T> entity) async {
-    await runner(entity.data);
+    await runner(entity.data, onUpdate);
 
     entity.status = EntityStatus.completed;
     _checkQueue();
@@ -84,7 +78,7 @@ class ActiveQueue<T> {
     final isSomethingRunned = _runPended();
 
     if (isSomethingCleaned || isSomethingRunned) {
-      _onUpdate();
+      onUpdate!();
     }
   }
 
@@ -95,7 +89,7 @@ class ActiveQueue<T> {
       )
     );
 
-    _onUpdate();
+    onUpdate!();
     _checkQueue();
   }
 }

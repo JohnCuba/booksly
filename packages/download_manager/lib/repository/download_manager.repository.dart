@@ -15,7 +15,7 @@ class DownloadManagerRepository {
   DownloadManagerRepository(this._downloaderApi) {
     _downloadQueue = ActiveQueue<DownloadTask>(
       runner: _downloaderApi.downloadBook,
-      onUpdate: _handleUpdateQueue
+      onUpdate: _handleUpdateQueue,
     );
   }
 
