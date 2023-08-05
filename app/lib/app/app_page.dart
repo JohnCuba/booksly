@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
+
 class AppPage {
   final String name;
   final String path;
+  final IconData? icon;
 
-  const AppPage({
+  AppPage({
     this.name = 'Unnamed',
     this.path = '',
+    this.icon,
   });
 }

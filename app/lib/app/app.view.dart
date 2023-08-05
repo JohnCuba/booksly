@@ -2,7 +2,9 @@ import 'package:booksly/config/injector.dart';
 import 'package:booksly/config/localization.dart';
 import 'package:booksly/app/view_models/download_manager/download_manager.cubit.dart';
 import 'package:booksly/navigation/navigation.cubit.dart';
+import 'package:booksly/shared/menu_tile/main.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,6 +47,7 @@ class AppView extends StatelessWidget {
       themeMode: ThemeMode.light,
       builder: (context, child) {
         return Scaffold(
+          backgroundColor: Colors.transparent,
           body: Row(
             children: [
               Flexible(
@@ -63,21 +66,23 @@ class AppView extends StatelessWidget {
                               toolbarHeight: 40,
                               backgroundColor: Colors.transparent,
                             ),
-                            ...navigationState.pages.map(
-                                    (e) => ListTile(
-                                  title: Text(e.name),
-                                  dense: navigationState.pages[navigationState.pageIndex].path != e.path,
+                            ...List.generate(
+                              navigationState.pages.length,
+                              (index) => MenuTile(
+                                  title: navigationState.pages[index].name,
+                                  icon: navigationState.pages[index].icon ?? CupertinoIcons.globe,
+                                  isActive: navigationState.pageIndex == index,
                                   onTap: () {
-                                    appRouter.navigateNamed(e.path);
+                                    appRouter.navigateNamed(navigationState.pages[index].path);
                                   },
-                                )
-                            ).toList()
+                              )
+                            ),
                           ],
                         ),
                       )
               ),
               Flexible(
-                  flex: 6,
+                  flex: 5,
                   child: child ?? const SizedBox(),
               ),
             ],

@@ -8,6 +8,7 @@ import 'package:booksly/navigation/router.dart';
 import 'package:booksly/pages/local_library/local_library.page.dart';
 import 'package:booksly/pages/settings/settings.page.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:settings/main.dart';
 
@@ -59,9 +60,17 @@ class NavigationCubit extends Cubit<NavigationState> {
 
     emit(state.copyWith(
       pages: [
-        AppPage(name: tr('pages.${LocalLibraryPage.name}'), path: LocalLibraryPage.path),
+        AppPage(
+          name: tr('pages.${LocalLibraryPage.name}'),
+          path: LocalLibraryPage.path,
+          icon: CupertinoIcons.home,
+        ),
         ...libraryPages,
-        AppPage(name: tr('pages.${SettingsPage.name}'), path: SettingsPage.path)
+        AppPage(
+          name: tr('pages.${SettingsPage.name}'),
+          path: SettingsPage.path,
+          icon: CupertinoIcons.settings,
+        )
       ]
     ));
   }
