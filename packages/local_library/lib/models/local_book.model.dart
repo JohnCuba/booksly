@@ -28,7 +28,7 @@ class LocalBook {
     } else if (extension == SupportedExtensions.fb2.name) {
       return _parseFb2(path);
     } else {
-      throw Exception('Unsuported file');
+      return _parseUnsupported(path);
     }
   }
 
@@ -53,5 +53,16 @@ class LocalBook {
         title: xml_common.getValue(rootFile, ['dc:title']),
         author: xml_common.getValue(rootFile, ['dc:creator']),
         description: xml_common.getValue(rootFile, ['dc:description', 'dc:subject']));
+  }
+
+  static Future<LocalBook> _parseUnsupported(String path) async {
+    final file = File(path);
+
+    return LocalBook(
+      file: file,
+      title: file.uri.pathSegments.last,
+      author: '',
+      description: '',
+    );
   }
 }
