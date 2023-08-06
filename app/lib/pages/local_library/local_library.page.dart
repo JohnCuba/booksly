@@ -1,4 +1,5 @@
 import 'package:booksly/config/injector.dart';
+import 'package:booksly/shared/themed_app_bar/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,14 +33,15 @@ class LocalLibraryView extends StatelessWidget {
   Widget build(BuildContext context) {
     final handleClickRefresh = context.read<LocalLibraryCubit>().update;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 2,
-        toolbarHeight: 40,
+      appBar: ThemedAppBar(
         title: Text(tr('pages.${LocalLibraryPage.name}')),
         actions: [
           IconButton(
             onPressed: handleClickRefresh,
-            icon: const Icon(CupertinoIcons.refresh),
+            icon: Icon(
+              CupertinoIcons.refresh,
+              color: Theme.of(context).appBarTheme.actionsIconTheme?.color,
+            ),
             tooltip: tr('common.refresh'),
             splashRadius: 14,
           )
@@ -64,7 +66,6 @@ class LocalLibraryView extends StatelessWidget {
     final files = context.watch<LocalLibraryCubit>().state.files;
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: files.length,

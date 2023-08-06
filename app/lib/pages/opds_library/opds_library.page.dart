@@ -1,3 +1,4 @@
+import 'package:booksly/shared/themed_app_bar/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -39,11 +40,8 @@ class OpdsLibraryView extends StatelessWidget {
     final downloads = context.watch<DownloadManagerCubit>().state.downloads;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 2,
-        toolbarHeight: 40,
+      appBar: ThemedAppBar(
         title: Text(libraryTitle),
-        automaticallyImplyLeading: false,
         actions: [
           DownloadsDropdown(list: downloads),
           SizedBox(width: downloads.length.toString().length * 8)

@@ -1,8 +1,10 @@
 import 'package:booksly/config/injector.dart';
 import 'package:booksly/config/localization.dart';
 import 'package:booksly/app/view_models/download_manager/download_manager.cubit.dart';
+import 'package:booksly/config/theme.dart';
 import 'package:booksly/navigation/navigation.cubit.dart';
 import 'package:booksly/shared/menu_tile/main.dart';
+import 'package:booksly/shared/themed_app_bar/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,28 +46,26 @@ class AppView extends StatelessWidget {
       locale: context.locale,
       routeInformationParser: appRouter.defaultRouteParser(),
       routerDelegate: appRouter.delegate(),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
+      theme: AppTheme.lightTheme,
       builder: (context, child) {
         return Scaffold(
-          backgroundColor: Colors.transparent,
           body: Row(
             children: [
               Flexible(
                   flex: 2,
                   child:
                       Container(
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           border: Border(
-                            right: BorderSide(color: Colors.black26)
+                            right: BorderSide(
+                              color: Theme.of(context).dividerColor,
+                            )
                           )
                         ),
                         child: Column(
                           children: [
-                            AppBar(
-                              elevation: 0,
-                              toolbarHeight: 40,
-                              backgroundColor: Colors.transparent,
-                            ),
+                            const ThemedAppBar(),
                             ...List.generate(
                               navigationState.pages.length,
                               (index) => MenuTile(

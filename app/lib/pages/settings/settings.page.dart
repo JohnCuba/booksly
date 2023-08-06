@@ -1,3 +1,4 @@
+import 'package:booksly/shared/themed_app_bar/main.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,11 +35,8 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 2,
-        toolbarHeight: 40,
+      appBar: ThemedAppBar(
         title: Text(tr('pages.${SettingsPage.name}')),
-        automaticallyImplyLeading: false,
       ),
       body: _buildPage(context),
     );
@@ -116,7 +114,6 @@ class SettingsView extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

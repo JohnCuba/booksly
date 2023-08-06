@@ -32,11 +32,11 @@ class MenuTile extends StatelessWidget {
               children: [
                 Icon(
                   icon,
-                  size: 18,
+                  size: 16,
                   color: Colors.blue,
                 ),
                 const SizedBox(width: 6),
-                Text(title),
+                Text(title, style: Theme.of(context).textTheme.labelLarge),
               ],
             ),
           ),
