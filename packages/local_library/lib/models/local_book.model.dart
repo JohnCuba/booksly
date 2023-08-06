@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:common/config/supported_extensions.dart';
 import 'package:common/epub/main.dart' as epub_common;
 import 'package:common/xml/main.dart' as xml_common;
+import 'package:common/fb2/main.dart' as fb2_common;
 
 final RegExp _fileExtension = RegExp(r'(?=.)[0-9a-z]+$');
 
@@ -25,11 +26,22 @@ class LocalBook {
     if (extension == SupportedExtensions.epub.name) {
       return _parseEpub(path);
     } else if (extension == SupportedExtensions.fb2.name) {
-      // TODO: Add fb2 parser
-      return Future(() => LocalBook(file: File(path), title: 'title', author: 'author', description: 'description'));
+      return _parseFb2(path);
     } else {
       throw Exception('Unsuported file');
     }
+  }
+
+  static Future<LocalBook> _parseFb2(String path) async {
+    final file = File(path);
+    final rootFile = await fb2_common.getRootXml(file);
+
+    return LocalBook(
+      file: file,
+      title: xml_common.getValue(rootFile, ['book-title']),
+      author: xml_common.getValue(rootFile, ['last-name']),
+      description: xml_common.getValue(rootFile, ['annotation']),
+    );
   }
 
   static Future<LocalBook> _parseEpub(String path) async {
