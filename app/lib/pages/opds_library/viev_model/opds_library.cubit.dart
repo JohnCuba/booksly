@@ -24,6 +24,8 @@ class OpdsLibraryCubit extends Cubit<OpdsLibraryState> {
       title: 'Home',
     ));
 
+    if (isClosed) return;
+
     emit(state.copyWith(
       isLoading: false,
       library: library,
