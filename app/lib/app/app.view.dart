@@ -50,6 +50,7 @@ class AppView extends StatelessWidget {
       theme: AppTheme.lightTheme,
       builder: (context, child) {
         return Scaffold(
+          backgroundColor: Colors.transparent,
           body: Row(
             children: [
               Flexible(
