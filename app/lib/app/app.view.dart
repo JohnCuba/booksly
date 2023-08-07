@@ -48,6 +48,7 @@ class AppView extends StatelessWidget {
       routerDelegate: appRouter.delegate(),
       themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       builder: (context, child) {
         return Scaffold(
           backgroundColor: Colors.transparent,
