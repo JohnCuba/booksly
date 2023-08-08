@@ -9,8 +9,6 @@ class LocalLibraryRepository {
   LocalLibraryRepository(this._localLibraryApi);
 
   Future<List<LocalBook>> getBooks(String localLibPath) {
-    return _localLibraryApi
-        .readFilesList(localLibPath)
-        .then((value) => value.toList());
+    return _localLibraryApi.readFilesList(localLibPath);
   }
 }
